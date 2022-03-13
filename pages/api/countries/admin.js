@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       const htmlString = `#EXTM3U
 #EXTINF:0 tvg-country=${req.body.country} tvg-logo='' group-title='Undefined',${req.body.title}
 ${req.body.url}`;
-      fs.writeFile(`lists/${titleTrimmed}.m3u`, htmlString, (err) => {
+      fs.writeFile(`public/lists/${titleTrimmed}.m3u`, htmlString, (err) => {
         if (err) console.log(err);
       });
       res.status(201).json(channel);

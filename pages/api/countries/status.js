@@ -44,7 +44,7 @@ ${data.url}
     try {
       // UPDATE FILE
       const dataText = fs.readFile(
-        `lists/mylist/${req.body.uid}.m3u`,
+        `public/lists/mylist/${req.body.uid}.m3u`,
         "utf8",
         function (err, data) {
           // Display the file content
@@ -54,7 +54,7 @@ ${data.url}
       //    let result = data.replace(regexPattern, req.body.url);
 
       fs.writeFile(
-        `lists/mylist/${req.body.uid}.m3u`,
+        `public/lists/mylist/${req.body.uid}.m3u`,
         htmltoString,
         { flag: "a+" },
         function (err) {
@@ -81,7 +81,7 @@ ${data.url}
     console.log(req.body);
 
     try {
-      fs.readFile("lists/list.m3u", "utf8", function (err, data) {
+      fs.readFile("public/lists/list.m3u", "utf8", function (err, data) {
         if (err) {
           // check and handle err
           res.status(500).json(err);
@@ -94,11 +94,15 @@ ${data.url}
         //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
         result = data.replace(re, "");
         console.log();
-        fs.writeFile("lists/list.m3u", result.trim(), function (err, data) {
-          if (err) {
-            /** check and handle err */
+        fs.writeFile(
+          "public/lists/list.m3u",
+          result.trim(),
+          function (err, data) {
+            if (err) {
+              /** check and handle err */
+            }
           }
-        });
+        );
       });
       res.status(200).json(result);
     } catch (error) {

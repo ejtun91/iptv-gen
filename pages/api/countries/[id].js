@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
   const findRemoveSync = require("find-remove");
 
-  findRemoveSync("lists/mylist", {
+  findRemoveSync("public/lists/mylist", {
     age: { seconds: 3600 },
     extensions: ".m3u",
     limit: 100,
@@ -123,7 +123,7 @@ export default async function handler(req, res) {
 
     try {
       fs.readFile(
-        `lists/mylist/${req.body.uid}.m3u`,
+        `public/lists/mylist/${req.body.uid}.m3u`,
         "utf8",
         function (err, data) {
           if (err) {
@@ -138,7 +138,7 @@ export default async function handler(req, res) {
           //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
           result = data.replace(re, "");
           fs.writeFile(
-            `lists/mylist/${req.body.uid}.m3u`,
+            `public/lists/mylist/${req.body.uid}.m3u`,
             result.trim(),
             function (err, data) {
               if (err) {
@@ -162,9 +162,13 @@ export default async function handler(req, res) {
       const htmlString = `#EXTM3U
 `;
 
-      fs.writeFile(`lists/mylist/${req.body.uid}.m3u`, htmlString, (err) => {
-        if (err) console.log(err);
-      });
+      fs.writeFile(
+        `public/lists/mylist/${req.body.uid}.m3u`,
+        htmlString,
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
       res.status(201).json(channel);
     } catch (error) {
       res.status(500).json(error);
