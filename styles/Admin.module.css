@@ -1,0 +1,225 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 150vh;
+}
+
+.item {
+  flex: 1;
+}
+
+.item:first-child {
+  height: 70px;
+  padding: 0 1rem;
+}
+
+.item:nth-child(2) {
+  order: 3;
+  flex: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item:nth-child(4) {
+  order: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.textarea {
+  padding: 20px;
+  border-radius: 5px;
+  white-space: normal;
+}
+
+.textarea:focus {
+  border: none;
+}
+
+.menu {
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  width: calc(60px * 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuItem:hover {
+}
+
+.iconRight {
+  margin-left: auto;
+}
+
+.iconMenu {
+  --button-size: calc(60px) * 0.5;
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: #484a4d;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+  text-decoration: none;
+}
+
+.iconMenu:hover {
+  filter: brightness(1.2);
+}
+
+.dropdown {
+  position: absolute;
+  top: 128px;
+  width: 300px;
+  transform: translateX(-45%);
+  background-color: rgb(59, 59, 59);
+  border: 1px solid rgb(36, 36, 36);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: hidden;
+  transition: height 500ms ease;
+}
+
+.dropMenuItem {
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: background 500ms;
+  padding: 0.5rem;
+  color: #dadce1;
+}
+
+.dropMenuItem:hover {
+  background-color: #525357;
+}
+.dropIconMenu {
+  margin-right: 0.5rem;
+}
+
+.dropIconMenu:hover {
+  filter: none;
+}
+
+.menuPrimaryDrop {
+  width: 100%;
+}
+
+/******** MENU PRIMARY ******/
+/* CSSTransition classes  */
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-primary-exit {
+  position: absolute;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-secondary-exit {
+}
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}
+
+/******* ADD NEW CHANNELS *********/
+
+.item:nth-child(3) {
+  width: 500px;
+  padding: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  position: relative;
+  border: 1px solid gray;
+  height: max-content;
+  margin-top: 5em;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
+}
+
+.addButton,
+.replaceBtn,
+.uploadBtn {
+  width: 25%;
+  border: none;
+  background-color: var(--mainColor);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0;
+  align-self: flex-end;
+  border-radius: 5px;
+}
+
+/******* ADD TAGS *********/
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: center;
+  width: 30%;
+}
+
+.inputTag {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.inputTag:focus {
+  outline: none;
+}

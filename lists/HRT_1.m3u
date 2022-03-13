@@ -1,0 +1,3 @@
+#EXTM3U
+        #EXTINF:0 tvg-country=10 tvg-logo='' group-title='Undefined',HRT 1
+        http://nova2.m3u

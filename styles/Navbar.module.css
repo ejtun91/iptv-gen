@@ -1,0 +1,94 @@
+.container {
+  height: 60px;
+  padding: 0 50px;
+  background-color: var(--mainColor);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logoContainer {
+  cursor: pointer;
+}
+
+.list {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  color: white;
+}
+
+.item:nth-child(2) {
+  background-color: aquamarine;
+}
+
+.listItem {
+  margin: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.navIcon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.listActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    position: relative;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  .list {
+    flex-direction: column;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 60px;
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+    left: -100%;
+    padding: 0;
+    margin: 0;
+    z-index: 999;
+    transition: 0.3s all;
+  }
+
+  .listActive {
+    background: var(--mainColor);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 60px;
+    transition: 0.5s all;
+    list-style: none;
+    color: #fff;
+    align-items: center;
+    margin: 0;
+    z-index: 999;
+    padding: 0;
+  }
+
+  .listItem {
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+  }
+  .navIcon {
+    display: flex;
+    color: #fff;
+    margin-right: 0;
+  }
+}

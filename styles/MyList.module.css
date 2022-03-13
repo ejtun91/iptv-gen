@@ -1,0 +1,113 @@
+.downloadListContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: rgb(238, 238, 238);
+  padding: 10px 5px;
+  margin-top: 5px;
+}
+
+.title {
+  color: rgb(1, 163, 1);
+  margin-left: 30px;
+  height: max-content;
+  padding: 0;
+  margin: 0;
+}
+
+.spanButton {
+  font-size: 11px;
+  cursor: pointer;
+  padding: 1px 3px;
+  color: white;
+}
+
+.spanButton:first-of-type {
+  background-color: rgb(1, 163, 1);
+}
+
+.spanButton:nth-of-type(2) {
+  background-color: rgb(63, 189, 231);
+}
+
+.spanButton:nth-of-type(3) {
+  background-color: crimson;
+  margin-left: auto;
+}
+
+.table {
+  border-spacing: 5px;
+  width: 100%;
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.tBody {
+  width: 100%;
+  display: table;
+}
+
+.tr:hover {
+  background-color: rgb(223, 238, 247);
+}
+
+.td {
+  border-bottom: 1px solid rgb(228, 228, 228);
+  cursor: grab;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: center;
+  padding: 10px 5px;
+}
+
+.countryTitle {
+  color: rgb(83, 83, 83);
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 2em;
+}
+
+.downloadChannelContainer {
+  display: flex;
+  width: 100%;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.span {
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.span:first-of-type {
+  color: crimson;
+  font-weight: bold;
+}
+
+.span:nth-of-type(2) {
+  color: white;
+  background-color: rgb(175, 220, 248);
+  padding: 1px 3px;
+}
+
+.span:last-of-type {
+  color: gray;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.iconOnline {
+  color: rgb(4, 167, 4);
+  margin-left: 3px;
+}
+
+.iconOffline {
+  color: crimson;
+  margin-left: 3px;
+}
