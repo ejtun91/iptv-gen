@@ -41,7 +41,7 @@ const handler = async (req, res) => {
         new: true,
       });
 
-      findRemoveSync("https://lists.iptvgenerate.com/lists/", {
+      findRemoveSync("lists", {
         limit: 1,
         files: `${req.body.title.replace(/ /g, "_")}.m3u`,
       });

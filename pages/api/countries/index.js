@@ -26,7 +26,7 @@ ${req.body.url}
     try {
       // UPDATE FILE
       const data = fs.readFile(
-        `https://lists.iptvgenerate.com/lists/mylist/${req.body.uid}.m3u`,
+        `lists/mylist/${req.body.uid}.m3u`,
         "utf8",
         function (err, data) {
           // Display the file content
@@ -36,7 +36,7 @@ ${req.body.url}
       //    let result = data.replace(regexPattern, req.body.url);
 
       fs.writeFile(
-        `https://lists.iptvgenerate.com/lists/mylist/${req.body.uid}.m3u`,
+        `lists/mylist/${req.body.uid}.m3u`,
         htmltoString,
         { flag: "a+" },
         function (err) {
@@ -55,7 +55,7 @@ ${req.body.url}
     let result;
     try {
       fs.readFile(
-        `https://lists.iptvgenerate.com/lists/mylist/${req.body.uid}.m3u`,
+        `lists/mylist/${req.body.uid}.m3u`,
         "utf8",
         function (err, data) {
           if (err) {
@@ -70,7 +70,7 @@ ${req.body.url}
           result = data.replace(regex, "");
           console.log();
           fs.writeFile(
-            `https://lists.iptvgenerate.com/lists/mylist/${req.body.uid}.m3u`,
+            `lists/mylist/${req.body.uid}.m3u`,
             result.trim(),
             function (err, data) {
               if (err) {

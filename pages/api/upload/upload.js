@@ -22,13 +22,9 @@ const handler = async (req, res) => {
     }
 
     try {
-      fs.writeFile(
-        `https://lists.iptvgenerate.com/lists/uploaded/playlist.m3u`,
-        req.body.playlist,
-        (err) => {
-          if (err) console.log(err);
-        }
-      );
+      fs.writeFile(`lists/uploaded/playlist.m3u`, req.body.playlist, (err) => {
+        if (err) console.log(err);
+      });
       res.status(200).send("uploaded");
     } catch (error) {
       res.status(500).json(error);
@@ -46,7 +42,7 @@ const handler = async (req, res) => {
     try {
       // UPDATE FILE
       const dataFiles = fs.readFile(
-        `https://lists.iptvgenerate.com/lists/uploaded/playlist.m3u`,
+        `lists/uploaded/playlist.m3u`,
         "utf8",
         function (err, files) {
           // Display the file content
@@ -62,10 +58,7 @@ const handler = async (req, res) => {
                 if (matchReg.includes(data[key].title)) {
                   let temp = data[key].title;
                   fs.readFile(
-                    `https://lists.iptvgenerate.com/lists/${temp.replace(
-                      / /g,
-                      "_"
-                    )}.m3u`,
+                    `lists/${temp.replace(/ /g, "_")}.m3u`,
                     "utf8",
                     async function (err, items) {
                       // Display the file content
@@ -79,10 +72,7 @@ const handler = async (req, res) => {
                         }
                       );
                       fs.writeFile(
-                        `https://lists.iptvgenerate.com/lists/${temp.replace(
-                          / /g,
-                          "_"
-                        )}.m3u`,
+                        `lists/${temp.replace(/ /g, "_")}.m3u`,
                         result,
                         function (err) {
                           if (err) return console.log(err);

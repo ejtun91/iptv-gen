@@ -28,13 +28,9 @@ export default async function handler(req, res) {
       const htmlString = `#EXTM3U
 #EXTINF:0 tvg-country=${req.body.country} tvg-logo='' group-title='Undefined',${req.body.title}
 ${req.body.url}`;
-      fs.writeFile(
-        `https://lists.iptvgenerate.com/lists/${titleTrimmed}.m3u`,
-        htmlString,
-        (err) => {
-          if (err) console.log(err);
-        }
-      );
+      fs.writeFile(`lists/${titleTrimmed}.m3u`, htmlString, (err) => {
+        if (err) console.log(err);
+      });
       res.status(201).json(channel);
     } catch (error) {
       res.status(500).json(error);

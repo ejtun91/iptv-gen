@@ -18,7 +18,7 @@ const handler = async (req, res) => {
 
   // UPDATE FILE
   const data = fs.readFileSync(
-    `https://lists.iptvgenerate.com/lists/${req.body.title}.m3u`,
+    `lists/${req.body.title}.m3u`,
     "utf8",
     function (err, data) {
       // Display the file content
@@ -28,10 +28,7 @@ const handler = async (req, res) => {
   let result = data.replace(regexPattern, req.body.url);
 
   fs.writeFileSync(
-    `https://lists.iptvgenerate.com/lists/${req.body.title.replace(
-      / /g,
-      "_"
-    )}.m3u`,
+    `lists/${req.body.title.replace(/ /g, "_")}.m3u`,
     result,
     function (err) {
       if (err) return console.log(err);
