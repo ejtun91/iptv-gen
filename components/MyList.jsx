@@ -123,7 +123,7 @@ const MyList = () => {
         <span
           onClick={() =>
             downloadFile(
-              `http://localhost:3000/lists/mylist/${uid}.m3u`,
+              `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
               `my_list.m3u`
             )
           }
@@ -133,7 +133,7 @@ const MyList = () => {
         </span>
         <span
           onClick={() =>
-            copyToClipboard(`http://localhost:3000/lists/mylist/${uid}.m3u`)
+            copyToClipboard(`https://iptvgenerate.com/lists/mylist/${uid}.m3u`)
           }
           className={styles.spanButton}
         >
@@ -178,7 +178,7 @@ const MyList = () => {
                   <span
                     onClick={() =>
                       copyToClipboard(
-                        `http://localhost:3000/lists/${channel.title.replace(
+                        `https://iptvgenerate.com/lists/${channel.title.replace(
                           / /g,
                           "_"
                         )}.m3u`

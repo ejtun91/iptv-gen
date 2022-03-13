@@ -228,7 +228,7 @@ const SearchResults = ({ status, searchList, tags }) => {
     });
     setTimeout(async () => {
       downloadFile(
-        `http://localhost:3000/lists/mylist/${uid}.m3u`,
+        `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
         "mylist.m3u"
       );
       dispatch(reset());
@@ -436,7 +436,7 @@ const SearchResults = ({ status, searchList, tags }) => {
                           <span
                             onClick={() =>
                               copyToClipboard(
-                                `http://localhost:3000/lists/${channel.title.replace(
+                                `https://iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`
@@ -449,7 +449,7 @@ const SearchResults = ({ status, searchList, tags }) => {
                           <span
                             onClick={() =>
                               downloadFile(
-                                `http://localhost:3000/lists/${channel.title.replace(
+                                `https://iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`,

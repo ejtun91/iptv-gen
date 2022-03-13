@@ -228,7 +228,7 @@ const Country = ({ channelList, status, tags }) => {
     });
     setTimeout(async () => {
       downloadFile(
-        `http://localhost:3000/lists/mylist/${uid}.m3u`,
+        `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
         "mylist.m3u"
       );
       dispatch(reset());
@@ -460,7 +460,7 @@ const Country = ({ channelList, status, tags }) => {
                           <span
                             onClick={() =>
                               copyToClipboard(
-                                `http://localhost:3000/lists/${channel.title.replace(
+                                `https://iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`
@@ -473,7 +473,7 @@ const Country = ({ channelList, status, tags }) => {
                           <span
                             onClick={() =>
                               downloadFile(
-                                `http://localhost:3000/lists/${channel.title.replace(
+                                `https://iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`,
@@ -495,7 +495,7 @@ const Country = ({ channelList, status, tags }) => {
                     <span
                       onClick={() =>
                         downloadFile(
-                          `http://localhost:3000/lists/mylist/${uid}.m3u`,
+                          `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
                           `my_list.m3u`
                         )
                       }
