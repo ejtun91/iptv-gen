@@ -26,11 +26,15 @@ export default async function handler(req, res) {
       const channel = await Channel.create(req.body);
       //UPLOAD FILE
       const htmlString = `#EXTM3U
-        #EXTINF:0 tvg-country=${req.body.country} tvg-logo='' group-title='Undefined',${req.body.title}
-        ${req.body.url}`;
-      fs.writeFile(`lists/${titleTrimmed}.m3u`, htmlString, (err) => {
-        if (err) console.log(err);
-      });
+#EXTINF:0 tvg-country=${req.body.country} tvg-logo='' group-title='Undefined',${req.body.title}
+${req.body.url}`;
+      fs.writeFile(
+        `https://lists.iptvgenerate.com/lists/${titleTrimmed}.m3u`,
+        htmlString,
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
       res.status(201).json(channel);
     } catch (error) {
       res.status(500).json(error);
