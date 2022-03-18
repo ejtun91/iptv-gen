@@ -26,6 +26,14 @@ import { axiosInstance } from "../../config";
 import Head from "next/head";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  uploadString,
+} from "firebase/storage";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -62,7 +70,6 @@ const Country = ({ channelList, status, tags }) => {
   const [query, setQuery] = useState("");
   const classes = useStyles();
   const uid = useSelector((state) => state.list.uid);
-
   const perPage = 10;
   const pagesVisited = page * perPage;
 
@@ -80,6 +87,26 @@ const Country = ({ channelList, status, tags }) => {
     setOpen(true);
   };
 
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAfGPqdU7pa2BctfdwBg4N8xT8QI5dRlrM",
+    authDomain: "iptv-gen-e3a27.firebaseapp.com",
+    projectId: "iptv-gen-e3a27",
+    storageBucket: "iptv-gen-e3a27.appspot.com",
+    messagingSenderId: "457438308207",
+    appId: "1:457438308207:web:a31d103de55e15abd86a9a",
+    measurementId: "G-L9HXRP075Y",
+  };
+
+  // Initialize Firebase
+  initializeApp(firebaseConfig);
+  const storage = getStorage();
+  const htmlString = `#EXTM3U
+`;
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -119,6 +146,9 @@ const Country = ({ channelList, status, tags }) => {
       } catch (error) {
         console.log(error);
       }
+      const storageRef = ref(storage, `lists/${uid}.m3u`);
+
+      uploadString(storageRef, htmlString);
     };
     newFile();
   }, [path]);
@@ -473,7 +503,7 @@ const Country = ({ channelList, status, tags }) => {
                           <span
                             onClick={() =>
                               downloadFile(
-                                `https://iptvgenerate.com/lists/${channel.title.replace(
+                                `http://iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`,

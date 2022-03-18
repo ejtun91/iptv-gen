@@ -10,6 +10,23 @@ export default async function handler(req, res) {
   dbConnect();
   const fs = require("fs");
   const concat = require("concat"); //Or use ES6 Syntax
+  let Client = require("ssh2-sftp-client");
+  ///var/www/iptvgenerator/lists/lists/mylist/mylist.m3u
+  let sftp = new Client();
+  const remoteDir = "/var/www/iptvgenerator/lists/lists/mylist/mylist.m3u";
+  const sshOpt = {
+    host: process.env.CONFIG_HOST,
+    port: process.env.CONFIG_PORT,
+    username: process.env.CONFIG_USERNAME,
+    password: process.env.CONFIG_PASSWORD,
+  };
+
+  // .then((data) => {
+  //   console.log(data, "the data info");
+  // })
+  // .catch((err) => {
+  //   console.log(err, "catch error");
+  // });
   // const iptvChecker = require("iptv-checker-module");
 
   // const options = {
@@ -107,6 +124,8 @@ export default async function handler(req, res) {
   // console.log(req);
 
   if (method === "GET") {
+    const htmlString = `#EXTM3U
+`;
     try {
       const channels = await Channel.find({ country: id });
       res.status(200).json(channels);
@@ -116,38 +135,48 @@ export default async function handler(req, res) {
   }
 
   if (method === "POST") {
-    const regexChannelSpecific = `^.*${req.body.title}.*$|.*${req.body.title}(.*\r?\n){2}`;
+    const regexChannelSpecific = `^.*${req.body.title}.*\n?|.*${req.body.title}(.*\n?){2}`;
     // const regChannel = `(?<=${req.body.title}\r|${req.body.title}\n|${req.body.title}\r\n)[^\r\n]+`;
     let re = new RegExp(regexChannelSpecific, "g");
     let result;
+    let remotePath = `/root/iptvgenerator/public/lists/mylist/${req.body.uid}.m3u`;
 
     try {
-      fs.readFile(
-        `public/lists/mylist/${req.body.uid}.m3u`,
-        "utf8",
-        function (err, data) {
-          if (err) {
-            // check and handle err
-            res.status(500).json(err);
-            res.end();
-          }
-          // data is the file contents as a single unified string
-          // .split('\n') splits it at each new-line character and all splits are aggregated into an array (i.e. turns it into an array of lines)
-          // .slice(1) returns a view into that array starting at the second entry from the front (i.e. the first element, but slice is zero-indexed so the "first" is really the "second")
-          // .join() takes that array and re-concatenates it into a string
-          //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
-          result = data.replace(re, "");
-          fs.writeFile(
-            `public/lists/mylist/${req.body.uid}.m3u`,
-            result.trim(),
-            function (err, data) {
-              if (err) {
-                /** check and handle err */
-              }
-            }
-          );
-        }
-      );
+      // fs.readFile(
+      //   `public/lists/mylist/${req.body.uid}.m3u`,
+      //   "utf8",
+      //   function (err, data) {
+      //     if (err) {
+      //       // check and handle err
+      //       res.status(500).json(err);
+      //       res.end();
+      //     }
+      //     // data is the file contents as a single unified string
+      //     // .split('\n') splits it at each new-line character and all splits are aggregated into an array (i.e. turns it into an array of lines)
+      //     // .slice(1) returns a view into that array starting at the second entry from the front (i.e. the first element, but slice is zero-indexed so the "first" is really the "second")
+      //     // .join() takes that array and re-concatenates it into a string
+      //     //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
+      //     result = data.replace(re, "");
+      //     fs.writeFile(
+      //       `public/lists/mylist/${req.body.uid}.m3u`,
+      //       result.trim(),
+      //       function (err, data) {
+      //         if (err) {
+      //           /** check and handle err */
+      //         }
+      //       }
+      //     );
+      //   }
+      // );
+      sftp
+        .connect(sshOpt)
+        .then(() => {
+          return sftp.get(remotePath);
+        })
+        .then((data) => {
+          result = Buffer.from(data).toString().replace(re, "").trim();
+          return sftp.put(Buffer.from(result), remotePath, { flags: "w" });
+        });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);
@@ -155,20 +184,57 @@ export default async function handler(req, res) {
   }
   if (method === "PUT") {
     //  let titleTrimmed = req.body.title.replace(/ /g, "_");
+    let data = fs.createReadStream(
+      "public/lists/template/playlist_template.m3u"
+    );
+    let remotePath = `/root/iptvgenerator/public/lists/mylist/${req.body.uid}.m3u`;
     const uuid = req.body.uid;
     try {
       const channel = await Channel.find();
-      //UPLOAD FILE
+      const file = "public/lists/mylist/mylist.m3u";
+      //  UPLOAD FILE
       const htmlString = `#EXTM3U
 `;
 
-      fs.writeFile(
-        `public/lists/mylist/${req.body.uid}.m3u`,
-        htmlString,
-        (err) => {
-          if (err) console.log(err);
-        }
-      );
+      sftp
+        .connect(sshOpt)
+        .then(() => {
+          return sftp.put(data, remotePath);
+        })
+        .then(() => {
+          return sftp.end();
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+      // fs.writeFile(
+      //   `public/lists/mylist/${req.body.uid}.m3u`,
+      //   htmlString,
+      //   (err) => {
+      //     if (err) console.log(err);
+      //   }
+      // );
+      // var c = new Client({ host: "https://lists.iptvgenerate.com", port: 22 });
+      // c.on("ready", function () {
+      //   c.cwd("/Content/myfiles", function (err) {
+      //     if (!err) {
+      //       c.put("/local/path/message.txt", "message.txt", function (err) {
+      //         if (err) throw err;
+      //         c.end();
+      //       });
+      //     }
+      //   });
+      // });
+      // c.connect();
+      // if (fs.existsSync(file)) {
+      //   fs.rename(
+      //     "public/lists/mylist/mylist.m3u",
+      //     `public/lists/mylist/${req.body.uid}.m3u`,
+      //     function (err) {
+      //       if (err) console.log("ERROR: " + err);
+      //     }
+      //   );
+      // }
       res.status(201).json(channel);
     } catch (error) {
       res.status(500).json(error);

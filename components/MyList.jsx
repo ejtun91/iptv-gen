@@ -86,21 +86,32 @@ const MyList = () => {
     handleClickCopy();
   };
 
-  const downloadFile = (url, fileName) => {
-    axios({
-      url: url,
-      method: "GET",
-      responseType: "blob", // important
-    })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", fileName);
-        document.body.appendChild(link);
-        link.click();
-      })
-      .catch((err) => console.log(err));
+  const downloadFile = async () => {
+    const config = { responseType: "blob" };
+    try {
+      const response = await axiosInstance.post(
+        "/filedownload",
+        { uid: uid },
+        config
+      );
+      if (response.data.error) {
+        console.error(response.data.error);
+      }
+
+      const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+      const fileLink = document.createElement("a");
+      fileLink.href = fileURL;
+      const fileName = response.headers["content-disposition"].substring(
+        22,
+        52
+      );
+      fileLink.setAttribute("download", fileName);
+      document.body.appendChild(fileLink);
+      fileLink.click();
+      fileLink.remove();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDeleteChannel = async (channel) => {
@@ -120,15 +131,7 @@ const MyList = () => {
     <div className={classes.root}>
       <div className={styles.downloadListContainer}>
         <h5 className={styles.title}>MY LIST ({quantity})</h5>
-        <span
-          onClick={() =>
-            downloadFile(
-              `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
-              `my_list.m3u`
-            )
-          }
-          className={styles.spanButton}
-        >
+        <span onClick={() => downloadFile()} className={styles.spanButton}>
           DOWNLOAD
         </span>
         <span
