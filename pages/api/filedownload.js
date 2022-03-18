@@ -25,8 +25,9 @@ export default async function handler(req, res) {
   //   }
 
   if (method === "POST") {
-    const url = `https://iptvgenerate.com/lists/mylist/${req.body.uid}.m3u`;
-
+    let id = req.body.uid;
+    const url = `https://iptvgenerate.com/lists/mylist/${id}.m3u`;
+    console.log(req);
     try {
       const response = await fetch(url); // replace this with your API call & options
       if (!response.ok)
