@@ -3,12 +3,20 @@ import dbConnect from "../../util/mongo";
 import stream from "stream";
 import { promisify } from "util";
 import fetch from "node-fetch";
+import NextCors from "nextjs-cors";
 
 export default async function handler(req, res) {
   const {
     method,
     query: { id },
   } = req;
+
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
 
   dbConnect();
   const https = require("https");
@@ -36,6 +44,7 @@ export default async function handler(req, res) {
       res.setHeader("Content-Type", "text/plain");
       res.setHeader("Content-Disposition", "attachment; filename= mylist.m3u");
       await pipeline(response.body, res);
+      res.send("ok");
     } catch (error) {
       res.status(500).json(error);
     }
