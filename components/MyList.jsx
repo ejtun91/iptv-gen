@@ -87,11 +87,10 @@ const MyList = () => {
   };
 
   const downloadFile = async () => {
-    const config = {
-      responseType: "blob",
-    };
     try {
-      const response = await axiosInstance.get("/filedownload", config);
+      const response = await axiosInstance.get("/filedownload", {
+        responseType: "blob",
+      });
       if (response.data.error) {
         console.error(response.data.error);
       }

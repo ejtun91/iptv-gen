@@ -2,9 +2,10 @@
 const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
+require("dotenv").config();
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = "localhost";
+const hostname = process.env.NODE_HOSTNAME;
 const port = 3000;
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });

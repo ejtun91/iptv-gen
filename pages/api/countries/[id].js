@@ -11,6 +11,8 @@ export default async function handler(req, res) {
     res.status(200).end();
   }
 
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   dbConnect();
   const fs = require("fs");
   const concat = require("concat"); //Or use ES6 Syntax
