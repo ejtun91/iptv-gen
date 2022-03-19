@@ -7,6 +7,10 @@ export default async function handler(req, res) {
     query: { id },
   } = req;
 
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+  }
+
   dbConnect();
   const fs = require("fs");
 

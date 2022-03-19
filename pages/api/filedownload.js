@@ -14,13 +14,22 @@ export default async function handler(req, res) {
   await NextCors(req, res, {
     // Options
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-    origin: "*",
+    origin: "https://iptvgenerate.com",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   });
 
+  const { PassThrough } = require("stream");
+  let Client = require("ssh2-sftp-client");
+  ///var/www/iptvgenerator/lists/lists/mylist/mylist.m3u
+  let sftp = new Client();
+  const remoteDir = "/var/www/iptvgenerator/lists/lists/mylist/mylist.m3u";
+  const sshOpt = {
+    host: process.env.CONFIG_HOST,
+    port: process.env.CONFIG_PORT,
+    username: process.env.CONFIG_USERNAME,
+    password: process.env.CONFIG_PASSWORD,
+  };
   dbConnect();
-  const https = require("https");
-  const fs = require("fs");
   const pipeline = promisify(stream.pipeline);
 
   //   if (method === "GET") {
@@ -32,21 +41,44 @@ export default async function handler(req, res) {
   //     }
   //   }
 
-  if (method === "POST") {
+  if (method === "GET") {
     let id = req.body.uid;
-    const url = `https://iptvgenerate.com/lists/mylist/${id}.m3u`;
-    console.log(req);
+    const url = `/root/iptvgenerator/public/lists/mylist/9667779a-f515-47a6-b367-c40eb8a0beb4.m3u`;
+    const urlPath =
+      "https://iptvgenerate.com/lists/mylist/9a4eb852-f24c-4853-8d4d-c453d8d1abf6.m3u";
     try {
-      const response = await fetch(url); // replace this with your API call & options
-      if (!response.ok)
-        throw new Error(`unexpected response ${response.statusText}`);
+      // const response = await fetch(urlPath); // replace this with your API call & options
+      // if (!response.ok)
+      //   throw new Error(`unexpected response ${response.statusText}`);
 
-      res.setHeader("Content-Type", "text/plain");
-      res.setHeader("Content-Disposition", "attachment; filename= mylist.m3u");
-      await pipeline(response.body, res);
-      res.send("ok");
-    } catch (error) {
-      res.status(500).json(error);
+      // if (req.method === "OPTIONS") {
+      //   res.status(200).end();
+      // }
+      // res.setHeader("Content-Type", "text/plain");
+      // res.setHeader("Content-Disposition", "attachment; filename= mylist.m3u");
+      // await pipeline(response.body, res);
+      // res.status(200).send(response);
+      sftp
+        .connect(sshOpt)
+        .then(() => {
+          return sftp.get(url);
+        })
+        .then((data) => {
+          if (req.method === "OPTIONS") {
+            res.status(200).end();
+          }
+          res.setHeader("Content-Type", "text/plain");
+          res.setHeader(
+            "Content-Disposition",
+            "attachment; filename= mylist.m3u"
+          );
+          res.status(200).send(Buffer.from(data));
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+    } catch (err) {
+      console.log(err);
     }
   }
 }
