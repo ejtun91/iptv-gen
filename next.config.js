@@ -23,4 +23,7 @@ module.exports = {
       },
     ];
   },
+  env: {
+    NEXT_PUBLIC_HOSTNAME: process.env.NEXT_PUBLIC_HOSTNAME,
+  },
 };
