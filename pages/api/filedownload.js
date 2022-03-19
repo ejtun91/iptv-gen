@@ -43,9 +43,9 @@ export default async function handler(req, res) {
   //     }
   //   }
 
-  if (method === "GET") {
-    let id = req.body.uid;
-    const url = `/root/iptvgenerator/public/lists/mylist/9667779a-f515-47a6-b367-c40eb8a0beb4.m3u`;
+  if (method === "POST") {
+    const id = req.body.uid;
+    const url = `/root/iptvgenerator/public/lists/mylist/${id}.m3u`;
     const urlPath =
       "https://iptvgenerate.com/lists/mylist/9a4eb852-f24c-4853-8d4d-c453d8d1abf6.m3u";
     try {

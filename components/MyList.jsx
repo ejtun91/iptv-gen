@@ -88,9 +88,13 @@ const MyList = () => {
 
   const downloadFile = async () => {
     try {
-      const response = await axiosInstance.get("/filedownload", {
-        responseType: "blob",
-      });
+      const response = await axiosInstance.post(
+        "/filedownload",
+        { uid: uid },
+        {
+          responseType: "blob",
+        }
+      );
       if (response.data.error) {
         console.error(response.data.error);
       }

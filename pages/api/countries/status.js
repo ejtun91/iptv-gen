@@ -11,6 +11,17 @@ export default async function handler(req, res) {
     res.status(200).end();
   }
 
+  let Client = require("ssh2-sftp-client");
+  ///var/www/iptvgenerator/lists/lists/mylist/mylist.m3u
+  let sftp = new Client();
+  const remoteDir = "/var/www/iptvgenerator/lists/lists/mylist/mylist.m3u";
+  const sshOpt = {
+    host: process.env.CONFIG_HOST,
+    port: process.env.CONFIG_PORT,
+    username: process.env.CONFIG_USERNAME,
+    password: process.env.CONFIG_PASSWORD,
+  };
+
   res.setHeader("Access-Control-Allow-Origin", "*");
 
   dbConnect();
@@ -34,6 +45,7 @@ export default async function handler(req, res) {
   if (method === "PUT") {
     let data = req.body.mylist;
     let htmltoString;
+    let remotePath = `/root/iptvgenerator/public/lists/mylist/${req.body.uid}.m3u`;
     // console.log(Object.assign(Channel, req.body));
     // console.log(req.body);
     for (var key in data) {
@@ -59,15 +71,27 @@ ${data.url}
       );
       //    let result = data.replace(regexPattern, req.body.url);
 
-      fs.writeFile(
-        `public/lists/mylist/${req.body.uid}.m3u`,
-        htmltoString,
-        { flag: "a+" },
-        function (err) {
-          if (err) return console.log(err);
-        }
-      );
-      res.status(200).json(dataText);
+      // fs.writeFile(
+      //   `public/lists/mylist/${req.body.uid}.m3u`,
+      //   htmltoString,
+      //   { flag: "a+" },
+      //   function (err) {
+      //     if (err) return console.log(err);
+      //   }
+      // );
+      // res.status(200).json(dataText);
+      const data = sftp
+        .connect(sshOpt)
+        .then(() => {
+          return sftp.get(remotePath);
+        })
+        .then((data) => {
+          return sftp.append(Buffer.from(htmltoString), remotePath);
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+      res.status(200).json(data);
     } catch (error) {
       res.status(500).json(error);
     }

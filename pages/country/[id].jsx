@@ -177,7 +177,6 @@ const Country = ({ channelList, status, tags }) => {
   const handleClick = async (channelId) => {
     dispatch(addList({ ...channelList[channelId], quantity }));
     //   console.log({ ...channelList[channelId], quantity });
-    console.log(channelId);
     try {
       await axiosInstance.put(`/countries`, {
         title: channelList[channelId].title,
@@ -228,13 +227,39 @@ const Country = ({ channelList, status, tags }) => {
       }
     });
     setTimeout(async () => {
-      downloadFile(
-        `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
-        "mylist.m3u"
-      );
+      // downloadFile(
+      //   `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
+      //   "mylist.m3u"
+      // );
       dispatch(reset());
+      // try {
+      //   await axiosInstance.post(`/countries`, { uid: uid });
+      // } catch (error) {
+      //   console.log(error);
+      // }
       try {
-        await axiosInstance.post(`/countries`, { uid: uid });
+        const response = await axiosInstance.post(
+          "/filedownload",
+          { uid: uid },
+          {
+            responseType: "blob",
+          }
+        );
+        if (response.data.error) {
+          console.error(response.data.error);
+        }
+
+        const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        const fileLink = document.createElement("a");
+        fileLink.href = fileURL;
+        const fileName = response.headers["content-disposition"].substring(
+          22,
+          52
+        );
+        fileLink.setAttribute("download", fileName);
+        document.body.appendChild(fileLink);
+        fileLink.click();
+        fileLink.remove();
       } catch (error) {
         console.log(error);
       }
@@ -494,12 +519,7 @@ const Country = ({ channelList, status, tags }) => {
                 <td className={styles.td}>
                   <div className={styles.downloadListBtns}>
                     <span
-                      onClick={() =>
-                        downloadFile(
-                          `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
-                          `my_list.m3u`
-                        )
-                      }
+                      onClick={() => handleListDownload()}
                       className={styles.spanButton}
                     >
                       DOWNLOAD THIS LIST
