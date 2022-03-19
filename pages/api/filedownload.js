@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   await NextCors(req, res, {
     // Options
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-    origin: "https://iptvgenerate.com",
+    origin: "http://127.0.0.1:3000",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   });
 
