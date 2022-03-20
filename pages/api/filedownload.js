@@ -69,7 +69,7 @@ export default async function handler(req, res) {
           if (req.method === "OPTIONS") {
             res.status(200).end();
           }
-          res.setHeader("Content-Type", "text/plain");
+          res.setHeader("Content-Type", "application/text");
           res.setHeader(
             "Content-Disposition",
             "attachment; filename= mylist.m3u"
