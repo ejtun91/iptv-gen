@@ -107,6 +107,7 @@ const MyList = () => {
         52
       );
       fileLink.setAttribute("download", fileName);
+      fileLink.target = "_blank";
       document.body.appendChild(fileLink);
       fileLink.click();
       fileLink.remove();
