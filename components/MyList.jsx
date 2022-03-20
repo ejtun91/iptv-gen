@@ -139,6 +139,7 @@ const MyList = () => {
           onClick={() =>
             copyToClipboard(`https://iptvgenerate.com/lists/mylist/${uid}.m3u`)
           }
+          style={{ pointerEvents: "none" }}
           className={styles.spanButton}
         >
           COPY
