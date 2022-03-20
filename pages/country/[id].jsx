@@ -499,7 +499,7 @@ const Country = ({ channelList, status, tags }) => {
                           <span
                             onClick={() =>
                               downloadFile(
-                                `http://iptvgenerate.com/lists/${channel.title.replace(
+                                `https://iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`,

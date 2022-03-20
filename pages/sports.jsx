@@ -358,7 +358,9 @@ const Sports = ({ channelData, tags }) => {
                             />
                           )}
                         </span>
-                        <span className={styles.spanInfo}>28th Jan 2022</span>
+                        <span className={styles.spanInfo}>
+                          {new Date(channel.createdAt).toDateString()}
+                        </span>
                         <span className={styles.spanInfo}>HD</span>
                         <span className={styles.spanInfo}>3800</span>
                       </div>
