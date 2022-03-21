@@ -37,36 +37,36 @@ export default async function handler(req, res) {
 ${req.body.url}
 `;
     try {
-      // UPDATE FILE
-      // const data = fs.readFile(
-      //   `public/lists/mylist/${req.body.uid}.m3u`,
-      //   "utf8",
-      //   function (err, data) {
-      //     // Display the file content
-      //     //        console.log(data);
-      //   }
-      // );
-      // //    let result = data.replace(regexPattern, req.body.url);
+      //  UPDATE FILE
+      const data = fs.readFile(
+        `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
+        "utf8",
+        function (err, data) {
+          // Display the file content
+          //        console.log(data);
+        }
+      );
+      //    let result = data.replace(regexPattern, req.body.url);
 
-      // fs.writeFile(
-      //   `public/lists/mylist/${req.body.uid}.m3u`,
-      //   htmltoString,
-      //   { flag: "a+" },
-      //   function (err) {
-      //     if (err) return console.log(err);
-      //   }
-      // );
-      const data = sftp
-        .connect(sshOpt)
-        .then(() => {
-          return sftp.get(remotePath);
-        })
-        .then((data) => {
-          return sftp.append(Buffer.from(htmltoString), remotePath);
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
+      fs.writeFile(
+        `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
+        htmltoString,
+        { flag: "a+" },
+        function (err) {
+          if (err) return console.log(err);
+        }
+      );
+      // const data = sftp
+      //   .connect(sshOpt)
+      //   .then(() => {
+      //     return sftp.get(remotePath);
+      //   })
+      //   .then((data) => {
+      //     return sftp.append(Buffer.from(htmltoString), remotePath);
+      //   })
+      //   .catch((err) => {
+      //     console.error(err.message);
+      //   });
       res.status(200).json(data);
     } catch (error) {
       res.status(500).json(error);
@@ -79,7 +79,7 @@ ${req.body.url}
     let result;
     try {
       fs.readFile(
-        `public/lists/mylist/${req.body.uid}.m3u`,
+        `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
         "utf8",
         function (err, data) {
           if (err) {
@@ -95,7 +95,7 @@ ${req.body.url}
           result = data.replace(regex, "");
           console.log();
           fs.writeFile(
-            `public/lists/mylist/${req.body.uid}.m3u`,
+            `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
             result.trim(),
             function (err, data) {
               if (err) {

@@ -228,7 +228,7 @@ const SearchResults = ({ status, searchList, tags }) => {
     });
     setTimeout(async () => {
       downloadFile(
-        `https://iptvgenerate.com/lists/mylist/${uid}.m3u`,
+        `https://lists.iptvgenerate.com//mylist/${uid}.m3u`,
         "mylist.m3u"
       );
       dispatch(reset());
@@ -449,7 +449,7 @@ const SearchResults = ({ status, searchList, tags }) => {
                           <span
                             onClick={() =>
                               downloadFile(
-                                `https://iptvgenerate.com/lists/${channel.title.replace(
+                                `https://lists.iptvgenerate.com/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`,

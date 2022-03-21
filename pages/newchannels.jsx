@@ -384,7 +384,7 @@ const NewChannels = ({ channelData, tags }) => {
                         <span
                           onClick={() =>
                             copyToClipboard(
-                              `https://iptvgenerate.com/lists/${channel.title.replace(
+                              `https://lists.iptvgenerate.com/${channel.title.replace(
                                 / /g,
                                 "_"
                               )}.m3u`
@@ -397,7 +397,7 @@ const NewChannels = ({ channelData, tags }) => {
                         <span
                           onClick={() =>
                             downloadFile(
-                              `https://iptvgenerate.com/lists/${channel.title.replace(
+                              `https://lists.iptvgenerate.com/${channel.title.replace(
                                 / /g,
                                 "_"
                               )}.m3u`,

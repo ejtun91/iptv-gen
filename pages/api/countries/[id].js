@@ -52,7 +52,7 @@ export default async function handler(req, res) {
 
   const findRemoveSync = require("find-remove");
 
-  findRemoveSync("public/lists/mylist", {
+  findRemoveSync("../../../../var/www/iptvgenerator/lists/mylist", {
     age: { seconds: 3600 },
     extensions: ".m3u",
     limit: 100,
@@ -148,41 +148,41 @@ export default async function handler(req, res) {
     let remotePath = `/root/iptvgenerator/public/lists/mylist/${req.body.uid}.m3u`;
 
     try {
-      // fs.readFile(
-      //   `public/lists/mylist/${req.body.uid}.m3u`,
-      //   "utf8",
-      //   function (err, data) {
-      //     if (err) {
-      //       // check and handle err
-      //       res.status(500).json(err);
-      //       res.end();
-      //     }
-      //     // data is the file contents as a single unified string
-      //     // .split('\n') splits it at each new-line character and all splits are aggregated into an array (i.e. turns it into an array of lines)
-      //     // .slice(1) returns a view into that array starting at the second entry from the front (i.e. the first element, but slice is zero-indexed so the "first" is really the "second")
-      //     // .join() takes that array and re-concatenates it into a string
-      //     //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
-      //     result = data.replace(re, "");
-      //     fs.writeFile(
-      //       `public/lists/mylist/${req.body.uid}.m3u`,
-      //       result.trim(),
-      //       function (err, data) {
-      //         if (err) {
-      //           /** check and handle err */
-      //         }
-      //       }
-      //     );
-      //   }
-      // );
-      sftp
-        .connect(sshOpt)
-        .then(() => {
-          return sftp.get(remotePath);
-        })
-        .then((data) => {
-          result = Buffer.from(data).toString().replace(re, "").trim();
-          return sftp.put(Buffer.from(result), remotePath, { flags: "w" });
-        });
+      fs.readFile(
+        `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
+        "utf8",
+        function (err, data) {
+          if (err) {
+            // check and handle err
+            res.status(500).json(err);
+            res.end();
+          }
+          // data is the file contents as a single unified string
+          // .split('\n') splits it at each new-line character and all splits are aggregated into an array (i.e. turns it into an array of lines)
+          // .slice(1) returns a view into that array starting at the second entry from the front (i.e. the first element, but slice is zero-indexed so the "first" is really the "second")
+          // .join() takes that array and re-concatenates it into a string
+          //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
+          result = data.replace(re, "");
+          fs.writeFile(
+            `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
+            result.trim(),
+            function (err, data) {
+              if (err) {
+                /** check and handle err */
+              }
+            }
+          );
+        }
+      );
+      // sftp
+      //   .connect(sshOpt)
+      //   .then(() => {
+      //     return sftp.get(remotePath);
+      //   })
+      //   .then((data) => {
+      //     result = Buffer.from(data).toString().replace(re, "").trim();
+      //     return sftp.put(Buffer.from(result), remotePath, { flags: "w" });
+      //   });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);
@@ -202,45 +202,24 @@ export default async function handler(req, res) {
       const htmlString = `#EXTM3U
 `;
 
-      sftp
-        .connect(sshOpt)
-        .then(() => {
-          return sftp.put(data, remotePath);
-        })
-        .then(() => {
-          return sftp.end();
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
-      // fs.writeFile(
-      //   `public/lists/mylist/${req.body.uid}.m3u`,
-      //   htmlString,
-      //   (err) => {
-      //     if (err) console.log(err);
-      //   }
-      // );
-      // var c = new Client({ host: "https://lists.iptvgenerate.com", port: 22 });
-      // c.on("ready", function () {
-      //   c.cwd("/Content/myfiles", function (err) {
-      //     if (!err) {
-      //       c.put("/local/path/message.txt", "message.txt", function (err) {
-      //         if (err) throw err;
-      //         c.end();
-      //       });
-      //     }
+      // sftp
+      //   .connect(sshOpt)
+      //   .then(() => {
+      //     return sftp.put(data, remotePath);
+      //   })
+      //   .then(() => {
+      //     return sftp.end();
+      //   })
+      //   .catch((err) => {
+      //     console.error(err.message);
       //   });
-      // });
-      // c.connect();
-      // if (fs.existsSync(file)) {
-      //   fs.rename(
-      //     "public/lists/mylist/mylist.m3u",
-      //     `public/lists/mylist/${req.body.uid}.m3u`,
-      //     function (err) {
-      //       if (err) console.log("ERROR: " + err);
-      //     }
-      //   );
-      // }
+      fs.writeFile(
+        `../../../../var/www/iptvgenerator/lists/mylist/${req.body.uid}.m3u`,
+        htmlString,
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
       res.status(201).json(channel);
     } catch (error) {
       res.status(500).json(error);
