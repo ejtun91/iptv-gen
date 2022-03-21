@@ -164,7 +164,7 @@ const Country = ({ channelList, status, tags }) => {
       method: "GET",
       responseType: "blob", // important
       headers: {
-        "Access-Control-Allow-Origin": "https://lists.iptvgenerate.com",
+        "Access-Control-Allow-Origin": "https://iptvgenerate.com",
       },
     })
       .then((response) => {
