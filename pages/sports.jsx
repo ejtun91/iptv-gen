@@ -281,7 +281,7 @@ const Sports = ({ channelData, tags }) => {
             severity="info"
           >
             If you are mobile user, please note that downloaded files might be
-            in "MUSIC" folder on your phone because of the .m3u extension
+            in `MUSIC` folder on your phone because of the .m3u extension
           </Alert>
           <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
