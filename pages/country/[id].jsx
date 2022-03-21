@@ -26,8 +26,9 @@ import { axiosInstance } from "../../config";
 import Head from "next/head";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/lab/Alert";
 
-function Alert(props) {
+function AlertMui(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
@@ -162,6 +163,9 @@ const Country = ({ channelList, status, tags }) => {
       url: url,
       method: "GET",
       responseType: "blob", // important
+      headers: {
+        "Access-Control-Allow-Origin": "https://lists.iptvgenerate.com",
+      },
     })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -308,6 +312,7 @@ const Country = ({ channelList, status, tags }) => {
         <meta itemProp="image" content={`${countries[path - 1].img}`} />
       </Head>
       <Featured />
+
       <div className={styles.container}>
         <div className={styles.mainContainer}>
           <div className={styles.searchContainer}>
@@ -365,19 +370,27 @@ const Country = ({ channelList, status, tags }) => {
               window.scroll(0, 450);
             }}
           />
+          <Alert
+            style={{ width: "100%", marginBottom: "0.8em" }}
+            variant="filled"
+            severity="info"
+          >
+            If you are mobile user, please note that downloaded files might be
+            in "MUSIC" folder on your phone because of the .m3u extension
+          </Alert>
           <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
+            <AlertMui onClose={handleClose} severity="success">
               Channel(s) successfully added.
-            </Alert>
+            </AlertMui>
           </Snackbar>
           <Snackbar
             open={openCopy}
             autoHideDuration={3000}
             onClose={handleCloseCopy}
           >
-            <Alert onClose={handleCloseCopy} severity="info">
+            <AlertMui onClose={handleCloseCopy} severity="info">
               Channel(s) successfully copied into the clipboard.
-            </Alert>
+            </AlertMui>
           </Snackbar>
           <table className={styles.table}>
             <tbody className={styles.tBody}>
@@ -501,7 +514,7 @@ const Country = ({ channelList, status, tags }) => {
                           <span
                             onClick={() =>
                               downloadFile(
-                                `https://lists.iptvgenerate.com/${channel.title.replace(
+                                `https://lists.iptvgenerate.com/lists/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`,

@@ -91,7 +91,6 @@ ${data.url}
       //   .catch((err) => {
       //     console.error(err.message);
       //   });
-      res.status(200).json(data);
     } catch (error) {
       res.status(500).json(error);
     }

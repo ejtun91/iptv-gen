@@ -14,7 +14,12 @@ import { countries } from "../data";
 import styles from "../styles/Country.module.css";
 import Head from "next/head";
 import { makeStyles, Snackbar } from "@material-ui/core";
-import { addList, addListPerPage, removeFromList } from "../redux/listSlice";
+import {
+  addList,
+  addListPerPage,
+  removeFromList,
+  reset,
+} from "../redux/listSlice";
 import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
@@ -134,6 +139,9 @@ const NewChannels = ({ channelData, tags }) => {
       url: url,
       method: "GET",
       responseType: "blob", // important
+      headers: {
+        "Access-Control-Allow-Origin": "https://lists.iptvgenerate.com",
+      },
     })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -266,6 +274,14 @@ const NewChannels = ({ channelData, tags }) => {
           <div className={styles.newChannelsTitle}>
             <h2>New Channels</h2>
           </div>
+          <Alert
+            style={{ width: "100%", marginBottom: "0.8em" }}
+            variant="filled"
+            severity="info"
+          >
+            If you are mobile user, please note that downloaded files might be
+            in "MUSIC" folder on your phone because of the .m3u extension
+          </Alert>
           <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Channel(s) successfully added.

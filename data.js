@@ -458,36 +458,42 @@ export const faq = [
   },
   {
     id: 2,
+    title: "Where are my downloaded files, I can't find them?",
+    content:
+      "If you are using mobile phone for downloading files, those files might end in 'MUSIC' folder, as for example android phone is recognizing .m3u extension as a music file, so it gets stored in 'MUSIC' folder instead of 'DOWNLOADS' folder. Thanks for understanding...",
+  },
+  {
+    id: 3,
     title: "Do I need satellite dish to use IPTV?",
     content:
       "There is no need for that. This works using your Internet provider, satellites are thing of the past for the channels.",
   },
   {
-    id: 3,
+    id: 4,
     title: "What are these m3u files what I download?",
     content:
       "The m3u files are like normal text files, only difference is the extension. These files can hold multiple TV Channels and their infos, basically this is the IPTV list used to load the IPTV players and play the channels.",
   },
   {
-    id: 4,
+    id: 5,
     title: "Should I be afraid of some security leaks?",
     content:
       "Well, the only thing what gets exposed is your IP address. For security reasons you may download any VPN you find online to mask your IPTV from hackers and governments.",
   },
   {
-    id: 5,
+    id: 6,
     title: "How can I play m3u files?",
     content:
       "It depenends, what device are you using. If you are a mobile user, you can download any IPTV player from your app market and if you are watching on the PC, we would recommend VLC player. For TVs, such as Samsung TV, there is an also app market with multiple IPTV players. Some of them are not free, but it is small donation for developers and you get good service.",
   },
   {
-    id: 6,
+    id: 7,
     title: "Some channels are not working, is there any quick fix?",
     content:
       "We are trying our best to keep the channels running, hopefully each day to maintain the good service. If you ever encounter broken channels, it is us to blame as we didn't updated last channels, but if that so be sure we will update it soon.",
   },
   {
-    id: 7,
+    id: 8,
     title: "What exactly this website offers?",
     content:
       "On the homepage you will see almost all countries on the world and channels inside each of them. You can look for your favourite channel and country and download it. The other good thing is you can make your own custom list of channels and when you think you are finished you can download whole list and watch it, either on mobile or PC/TV device. One more good thing is that we offer full list download, for example if for your country is more than 30 channels, you can download all channels on single page.",

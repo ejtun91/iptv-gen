@@ -139,6 +139,9 @@ const Sports = ({ channelData, tags }) => {
       url: url,
       method: "GET",
       responseType: "blob", // important
+      headers: {
+        "Access-Control-Allow-Origin": "https://lists.iptvgenerate.com",
+      },
     })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -272,6 +275,14 @@ const Sports = ({ channelData, tags }) => {
           <div className={styles.newChannelsTitle}>
             <h2>Sport Channels</h2>
           </div>
+          <Alert
+            style={{ width: "100%", marginBottom: "0.8em" }}
+            variant="filled"
+            severity="info"
+          >
+            If you are mobile user, please note that downloaded files might be
+            in "MUSIC" folder on your phone because of the .m3u extension
+          </Alert>
           <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Channel(s) successfully added.
