@@ -134,25 +134,30 @@ const NewChannels = ({ channelData, tags }) => {
     }
   };
 
-  const downloadFile = (url, fileName) => {
-    axios({
-      url: url,
-      method: "GET",
-      responseType: "blob", // important
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.target = "_blank";
-        link.setAttribute("download", fileName);
-        document.body.appendChild(link);
-        link.click();
-      })
-      .catch((err) => console.log(err));
+  const downloadFile = async (url, fileName) => {
+    try {
+      const response = await axiosInstance.put(
+        "/filedownload",
+        { urlPath: url },
+        {
+          responseType: "blob",
+        }
+      );
+      if (response.data.error) {
+        console.error(response.data.error);
+      }
+
+      const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+      const fileLink = document.createElement("a");
+      fileLink.href = fileURL;
+      fileLink.setAttribute("download", fileName);
+      fileLink.target = "_blank";
+      document.body.appendChild(fileLink);
+      fileLink.click();
+      fileLink.remove();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClick = async (channelId) => {

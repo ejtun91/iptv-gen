@@ -43,6 +43,25 @@ export default async function handler(req, res) {
   //     }
   //   }
 
+  if (method === "PUT") {
+    const urlPath = req.body.urlPath;
+
+    try {
+      const response = await fetch(urlPath); // replace this with your API call & options
+      if (!response.ok)
+        throw new Error(`unexpected response ${response.statusText}`);
+
+      if (req.method === "OPTIONS") {
+        res.status(200).end();
+      }
+      res.setHeader("Content-Type", "application/text");
+      await pipeline(response.body, res);
+      res.status(200).send(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   if (method === "POST") {
     const id = req.body.uid;
     const url = `/root/iptvgenerator/public/lists/mylist/${id}.m3u`;
