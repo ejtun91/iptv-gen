@@ -25,8 +25,9 @@ import MyList from "../../components/MyList";
 import { axiosInstance } from "../../config";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/lab/Alert";
 
-function Alert(props) {
+function AlertMui(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
@@ -156,21 +157,30 @@ const SearchResults = ({ status, searchList, tags }) => {
     }
   };
 
-  const downloadFile = (url, fileName) => {
-    axios({
-      url: url,
-      method: "GET",
-      responseType: "blob", // important
-    })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", fileName);
-        document.body.appendChild(link);
-        link.click();
-      })
-      .catch((err) => console.log(err));
+  const downloadFile = async (url, fileName) => {
+    try {
+      const response = await axiosInstance.put(
+        "/filedownload",
+        { urlPath: url },
+        {
+          responseType: "blob",
+        }
+      );
+      if (response.data.error) {
+        console.error(response.data.error);
+      }
+
+      const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+      const fileLink = document.createElement("a");
+      fileLink.href = fileURL;
+      fileLink.setAttribute("download", fileName);
+      fileLink.target = "_blank";
+      document.body.appendChild(fileLink);
+      fileLink.click();
+      fileLink.remove();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClick = async (channelId) => {
@@ -227,15 +237,31 @@ const SearchResults = ({ status, searchList, tags }) => {
       }
     });
     setTimeout(async () => {
-      downloadFile(
-        `https://lists.iptvgenerate.com//mylist/${uid}.m3u`,
-        "mylist.m3u"
-      );
       dispatch(reset());
       try {
-        await axiosInstance.post(`/countries`, {
-          uid: uid,
-        });
+        const response = await axiosInstance.post(
+          "/filedownload",
+          { uid: uid },
+          {
+            responseType: "blob",
+          }
+        );
+        if (response.data.error) {
+          console.error(response.data.error);
+        }
+
+        const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        const fileLink = document.createElement("a");
+        fileLink.href = fileURL;
+        const fileName = response.headers["content-disposition"].substring(
+          22,
+          52
+        );
+        fileLink.setAttribute("download", fileName);
+        fileLink.target = "_blank";
+        document.body.appendChild(fileLink);
+        fileLink.click();
+        fileLink.remove();
       } catch (error) {
         console.log(error);
       }
@@ -260,18 +286,18 @@ const SearchResults = ({ status, searchList, tags }) => {
           </div>
           <table className={styles.table}>
             <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-              <Alert onClose={handleClose} severity="success">
+              <AlertMui onClose={handleClose} severity="success">
                 Channel(s) successfully added.
-              </Alert>
+              </AlertMui>
             </Snackbar>
             <Snackbar
               open={openCopy}
               autoHideDuration={3000}
               onClose={handleCloseCopy}
             >
-              <Alert onClose={handleCloseCopy} severity="info">
+              <AlertMui onClose={handleCloseCopy} severity="info">
                 Channel(s) successfully copied into the clipboard.
-              </Alert>
+              </AlertMui>
             </Snackbar>
             <tbody className={styles.tBody}>
               {/* <tr className={styles.tr}>
@@ -324,6 +350,14 @@ const SearchResults = ({ status, searchList, tags }) => {
               window.scroll(0, 450);
             }}
           />
+          <Alert
+            style={{ width: "100%", marginBottom: "0.8em" }}
+            variant="filled"
+            severity="info"
+          >
+            If you are mobile user, please note that downloaded files might be
+            in `MUSIC` folder on your phone because of the .m3u extension
+          </Alert>
           <table className={styles.table}>
             <tbody className={styles.tBody}>
               <tr className={styles.tr}>
@@ -436,7 +470,7 @@ const SearchResults = ({ status, searchList, tags }) => {
                           <span
                             onClick={() =>
                               copyToClipboard(
-                                `https://iptvgenerate.com/lists/${channel.title.replace(
+                                `https://lists.iptvgenerate.com/${channel.title.replace(
                                   / /g,
                                   "_"
                                 )}.m3u`
