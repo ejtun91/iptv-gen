@@ -176,7 +176,7 @@ const NewChannels = ({ channelData, tags }) => {
   };
 
   const handleList = async () => {
-    dispatch(addListPerPage(channelData));
+    dispatch(addListPerPage(channelData.slice(0, 50)));
     //   const list = listPerPage(page);
 
     channelData.map(async (item) => {
@@ -196,7 +196,7 @@ const NewChannels = ({ channelData, tags }) => {
   };
 
   const handleListDownload = async () => {
-    dispatch(addListPerPage(channelData));
+    dispatch(addListPerPage(channelData.slice(0, 50)));
     //  const list = listPerPage(page);
 
     channelData.map(async (item) => {
@@ -332,7 +332,7 @@ const NewChannels = ({ channelData, tags }) => {
               </tr>
               {channelData
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                .slice(0, 99)
+                .slice(0, 50)
                 .map((channel, i) => (
                   <tr
                     style={{

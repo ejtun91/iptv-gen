@@ -8,6 +8,8 @@ import Featured from "../components/Featured";
 import MyList from "../components/MyList";
 import Notice from "../components/Notice";
 import SearchBar from "../components/SearchBar";
+import { Pagination } from "@material-ui/lab";
+
 import Tags from "../components/Tags";
 import { axiosInstance } from "../config";
 import { countries } from "../data";
@@ -53,6 +55,16 @@ const Sports = ({ channelData, tags }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openCopy, setOpenCopy] = useState(false);
+  const [page, setPage] = useState(1);
+  const perPage = 10;
+  const pagesVisited = page * perPage;
+
+  const listPerPage = (page) => {
+    const slicedList = channelData
+      .slice((page - 1) * perPage, pagesVisited)
+      .map((list) => list);
+    return slicedList;
+  };
 
   const handleClickSnack = () => {
     setOpen(true);
@@ -177,7 +189,7 @@ const Sports = ({ channelData, tags }) => {
   };
 
   const handleList = async () => {
-    dispatch(addListPerPage(channelData));
+    dispatch(addListPerPage(listPerPage(page)));
     //   const list = listPerPage(page);
 
     channelData.map(async (item) => {
@@ -197,7 +209,7 @@ const Sports = ({ channelData, tags }) => {
   };
 
   const handleListDownload = async () => {
-    dispatch(addListPerPage(channelData));
+    dispatch(addListPerPage(listPerPage(page)));
     //  const list = listPerPage(page);
 
     channelData.map(async (item) => {
@@ -302,6 +314,19 @@ const Sports = ({ channelData, tags }) => {
               Channel(s) successfully copied into the clipboard.
             </Alert>
           </Snackbar>
+          <Pagination
+            style={{
+              padding: 20,
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            count={Math.ceil(channelData.length / 10)}
+            onChange={(_, value) => {
+              setPage(value);
+              window.scroll(0, 450);
+            }}
+          />
           <table className={styles.table}>
             <tbody className={styles.tBody}>
               <tr className={styles.tr}>
@@ -331,109 +356,109 @@ const Sports = ({ channelData, tags }) => {
                   </div>
                 </th>
               </tr>
-              {channelData
-                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                .slice(0, 99)
-                .map((channel, i) => (
-                  <tr
-                    style={{
-                      backgroundColor: `${
-                        mylist?.items.some((item) => item._id === channel._id)
-                          ? "#c6f5ba"
-                          : "white"
-                      }`,
-                    }}
-                    key={channel._id}
-                    className={styles.tr}
-                  >
-                    <td className={styles.td}>
-                      <div className={styles.channelName}>
-                        <Image
-                          height={10}
-                          width={15}
-                          src={countries[channel.country - 1].img}
-                        />
-                        <span className={styles.channelTitle}>
-                          {channel.title}
-                        </span>
-                      </div>
-                      <div className={styles.downloadListInfo}>
-                        <span className={styles.spanInfo}>
-                          <span className={styles.live}>
-                            {channel.liveliness}
-                          </span>{" "}
-                          <span className={styles.days}>{channel.days}</span>
-                        </span>
-                        <span className={styles.spanInfo}>
-                          {channel.status === 1 ? (
-                            <AddCircle
-                              style={{ fontSize: 17, color: "green" }}
-                            />
+              {channelData &&
+                channelData
+                  .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                  .map((channel, i) => (
+                    <tr
+                      style={{
+                        backgroundColor: `${
+                          mylist?.items.some((item) => item._id === channel._id)
+                            ? "#c6f5ba"
+                            : "white"
+                        }`,
+                      }}
+                      key={channel._id}
+                      className={styles.tr}
+                    >
+                      <td className={styles.td}>
+                        <div className={styles.channelName}>
+                          <Image
+                            height={10}
+                            width={15}
+                            src={countries[channel.country - 1].img}
+                          />
+                          <span className={styles.channelTitle}>
+                            {channel.title}
+                          </span>
+                        </div>
+                        <div className={styles.downloadListInfo}>
+                          <span className={styles.spanInfo}>
+                            <span className={styles.live}>
+                              {channel.liveliness}
+                            </span>{" "}
+                            <span className={styles.days}>{channel.days}</span>
+                          </span>
+                          <span className={styles.spanInfo}>
+                            {channel.status === 1 ? (
+                              <AddCircle
+                                style={{ fontSize: 17, color: "green" }}
+                              />
+                            ) : (
+                              <RemoveCircle
+                                style={{ fontSize: 17, color: "crimson" }}
+                              />
+                            )}
+                          </span>
+                          <span className={styles.spanInfo}>
+                            {new Date(channel.createdAt).toDateString()}
+                          </span>
+                          <span className={styles.spanInfo}>HD</span>
+                          <span className={styles.spanInfo}>3800</span>
+                        </div>
+                        <div className={styles.downloadChannelContainer}>
+                          {mylist?.items.some(
+                            (item) => item._id === channel._id
+                          ) ? (
+                            <span
+                              className={styles.spanBtn}
+                              style={{
+                                color: "white",
+                                backgroundColor: "darkgreen",
+                              }}
+                              onClick={() => handleDeleteChannel(channel)}
+                            >
+                              REMOVE
+                            </span>
                           ) : (
-                            <RemoveCircle
-                              style={{ fontSize: 17, color: "crimson" }}
-                            />
+                            <span
+                              className={styles.spanBtn}
+                              onClick={() => handleClick(i)}
+                            >
+                              ADD TO LIST
+                            </span>
                           )}
-                        </span>
-                        <span className={styles.spanInfo}>
-                          {new Date(channel.createdAt).toDateString()}
-                        </span>
-                        <span className={styles.spanInfo}>HD</span>
-                        <span className={styles.spanInfo}>3800</span>
-                      </div>
-                      <div className={styles.downloadChannelContainer}>
-                        {mylist?.items.some(
-                          (item) => item._id === channel._id
-                        ) ? (
                           <span
+                            onClick={() =>
+                              copyToClipboard(
+                                `https://lists.iptvgenerate.com/${channel.title.replace(
+                                  / /g,
+                                  "_"
+                                )}.m3u`
+                              )
+                            }
                             className={styles.spanBtn}
-                            style={{
-                              color: "white",
-                              backgroundColor: "darkgreen",
-                            }}
-                            onClick={() => handleDeleteChannel(channel)}
                           >
-                            REMOVE
+                            COPY
                           </span>
-                        ) : (
                           <span
+                            onClick={() =>
+                              downloadFile(
+                                `https://lists.iptvgenerate.com/${channel.title.replace(
+                                  / /g,
+                                  "_"
+                                )}.m3u`,
+                                `${channel.title.replace(/ /g, "_")}.m3u`
+                              )
+                            }
                             className={styles.spanBtn}
-                            onClick={() => handleClick(i)}
                           >
-                            ADD TO LIST
+                            DOWNLOAD
                           </span>
-                        )}
-                        <span
-                          onClick={() =>
-                            copyToClipboard(
-                              `https://lists.iptvgenerate.com/${channel.title.replace(
-                                / /g,
-                                "_"
-                              )}.m3u`
-                            )
-                          }
-                          className={styles.spanBtn}
-                        >
-                          COPY
-                        </span>
-                        <span
-                          onClick={() =>
-                            downloadFile(
-                              `https://lists.iptvgenerate.com/${channel.title.replace(
-                                / /g,
-                                "_"
-                              )}.m3u`,
-                              `${channel.title.replace(/ /g, "_")}.m3u`
-                            )
-                          }
-                          className={styles.spanBtn}
-                        >
-                          DOWNLOAD
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
 
               <tr className={styles.tr}>
                 <td className={styles.td}>
@@ -452,6 +477,19 @@ const Sports = ({ channelData, tags }) => {
               </tr>
             </tbody>
           </table>
+          <Pagination
+            style={{
+              padding: 20,
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            count={Math.ceil(channelData.length / 10)}
+            onChange={(_, value) => {
+              setPage(value);
+              window.scroll(0, 450);
+            }}
+          />
         </div>
         <div className={styles.sidebar}>
           <div className={styles.item}>

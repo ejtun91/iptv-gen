@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "../styles/Footer.module.css";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -24,11 +25,31 @@ const Footer = () => {
       <div className={styles.item}>
         <span className={styles.copyright}>IPTV Gen @2022</span>
         <ul className={styles.list}>
-          <li className={styles.listItem}>Home</li>
-          <li className={styles.listItem}>New Channels</li>
-          <li className={styles.listItem}>Sport</li>
-          <li className={styles.listItem}>Contact Us</li>
-          <li className={styles.listItem}>Privacy Policy</li>
+          <li className={styles.listItem}>
+            <Link href="/" passHref>
+              Home
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/newchannels" passHref>
+              New Channels
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/sports" passHref>
+              Sport
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/contact" passHref>
+              Contact Us
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link href="/privacy" passHref>
+              Privacy Policy
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
