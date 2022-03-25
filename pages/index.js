@@ -31,19 +31,19 @@ export default function Home({ channels, tags }) {
         />
         <meta itemProp="image" content="" />
         <link rel="icon" href="/logo.ico" />
-        <Script
-          id="google-analytics"
-          src="https://www.googletagmanager.com/gtag/js?id=G-7SRLLS8G8E"
-          onLoad={() => {
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-              dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-            gtag("config", "G-7SRLLS8G8E");
-          }}
-        />
       </Head>
+      <Script
+        id="google-analytics"
+        src="https://www.googletagmanager.com/gtag/js?id=G-7SRLLS8G8E"
+        onLoad={() => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+          gtag("config", "G-7SRLLS8G8E");
+        }}
+      />
       <Featured />
       <div className={styles.mainContainer}>
         <CountryList query={query} setQuery={setQuery} />
