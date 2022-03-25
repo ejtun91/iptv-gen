@@ -315,6 +315,7 @@ const Country = ({ channelList, status, tags }) => {
           content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download m3u and m3u8 files."
         />
         <meta itemProp="image" content={`${countries[path - 1].img}`} />
+        <link rel="icon" href="/logo.ico" />
       </Head>
       <Featured />
 

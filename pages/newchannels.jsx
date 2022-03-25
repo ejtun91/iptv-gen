@@ -269,6 +269,7 @@ const NewChannels = ({ channelData, tags }) => {
           itemProp="description"
           content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
         />
+        <link rel="icon" href="/logo.ico" />
       </Head>
       <Featured />
       <div className={styles.container}>

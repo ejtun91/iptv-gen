@@ -1,6 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-import Image from "next/image";
+import Script from "next/script";
 import { useEffect, useState } from "react";
 import CountryList from "../components/CountryList";
 import Featured from "../components/Featured";
@@ -31,6 +31,18 @@ export default function Home({ channels, tags }) {
         />
         <meta itemProp="image" content="" />
         <link rel="icon" href="/logo.ico" />
+        <Script
+          id="google-analytics"
+          src="https://www.googletagmanager.com/gtag/js?id=G-7SRLLS8G8E"
+          onLoad={() => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-7SRLLS8G8E");
+          }}
+        />
       </Head>
       <Featured />
       <div className={styles.mainContainer}>

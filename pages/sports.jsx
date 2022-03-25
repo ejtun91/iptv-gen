@@ -282,6 +282,7 @@ const Sports = ({ channelData, tags }) => {
           itemProp="description"
           content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download m3u and m3u8 files."
         />
+        <link rel="icon" href="/logo.ico" />
       </Head>
       <Featured />
       <div className={styles.container}>
