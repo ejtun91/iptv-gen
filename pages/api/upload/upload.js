@@ -23,7 +23,7 @@ const handler = async (req, res) => {
 
     try {
       fs.writeFile(
-        `public/lists/uploaded/playlist.m3u`,
+        `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
         req.body.playlist,
         (err) => {
           if (err) console.log(err);
