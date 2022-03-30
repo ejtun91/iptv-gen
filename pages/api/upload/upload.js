@@ -23,7 +23,10 @@ const handler = async (req, res) => {
       function (err, data) {
         if (err) throw err;
 
-        var result = data.replace(/(\sHD)|(\sFHD)|(\sUHD)/g, "");
+        var result = data.replace(
+          /(\sHD)|(\sFHD)|(\sUHD)|(\s(HD))|(\s(UHD))|(\s(FHD))/g,
+          ""
+        );
 
         try {
           fs.writeFile(
