@@ -132,6 +132,7 @@ export default async function handler(req, res) {
   if (method === "GET") {
     const htmlString = `#EXTM3U
 `;
+
     try {
       const channels = await Channel.find({ country: id });
       res.status(200).json(channels);

@@ -1,5 +1,6 @@
 import Channel from "../../../models/Channel";
 import dbConnect from "../../../util/mongo";
+import config from "../../../../";
 
 const handler = async (req, res) => {
   const {
@@ -15,6 +16,33 @@ const handler = async (req, res) => {
   dbConnect();
 
   // console.log(req.body);
+
+  if (method === "GET") {
+    fs.readFile(
+      "../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u",
+      "utf-8",
+      function (err, data) {
+        if (err) throw err;
+
+        var result = data.replace(/(\sHD)|(\sFHD)|(\sUHD)/g, "");
+
+        try {
+          fs.writeFile(
+            `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
+            result.trim(),
+            function (err, data) {
+              if (err) {
+                /** check and handle err */
+              }
+            }
+          );
+          res.status(200).json("ok");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    );
+  }
 
   if (method === "PUT") {
     if (!token || token !== process.env.TOKEN) {
@@ -53,14 +81,18 @@ const handler = async (req, res) => {
           for (var key in data) {
             if (data.hasOwnProperty(key)) {
               //do something with e.g. req.body[key]
-
+              //     console.log(files);
               let pattern = `${data[key].title}`;
               let pat = new RegExp(pattern, "gi");
-              //   console.log(files.match(pat));
+              //  console.log(files.match(pat));
               let matchReg = files.match(pat);
+              // if (pat.test(files)) {
+              //   console.log(files);
+              // }
               if (pat.test(files)) {
                 if (matchReg.includes(data[key].title)) {
                   let temp = data[key].title;
+
                   fs.readFile(
                     `../../../../var/www/iptvgenerator/lists/${temp.replace(
                       / /g,
@@ -71,7 +103,11 @@ const handler = async (req, res) => {
                       // Display the file content
                       let regexP = `(?<=${temp}\r|${temp}\n|${temp}\r\n)[^\r\n]+`;
                       let pat2 = new RegExp(regexP, "g");
+                      //     console.log(files.match(pat2));
+                      console.log(files.match(pat2));
+
                       let result = items.replace(pat2, files.match(pat2)[0]);
+
                       await Channel.updateOne(
                         { title: temp },
                         {

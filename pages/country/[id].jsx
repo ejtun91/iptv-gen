@@ -475,7 +475,7 @@ const Country = ({ channelList, status, tags }) => {
                             )}
                           </span>
                           <span className={styles.spanInfo}>
-                            {new Date(channel.createdAt).toDateString()}
+                            {new Date(channel.updatedAt).toDateString()}
                           </span>
                           <span className={styles.spanInfo}>HD</span>
                           <span className={styles.spanInfo}>3800</span>

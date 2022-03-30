@@ -110,29 +110,33 @@ ${data.url}
     console.log(req.body);
 
     try {
-      fs.readFile("public/lists/list.m3u", "utf8", function (err, data) {
-        if (err) {
-          // check and handle err
-          res.status(500).json(err);
-          res.end();
-        }
-        // data is the file contents as a single unified string
-        // .split('\n') splits it at each new-line character and all splits are aggregated into an array (i.e. turns it into an array of lines)
-        // .slice(1) returns a view into that array starting at the second entry from the front (i.e. the first element, but slice is zero-indexed so the "first" is really the "second")
-        // .join() takes that array and re-concatenates it into a string
-        //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
-        result = data.replace(re, "");
-        console.log();
-        fs.writeFile(
-          "public/lists/list.m3u",
-          result.trim(),
-          function (err, data) {
-            if (err) {
-              /** check and handle err */
-            }
+      fs.readFile(
+        "../../../../var/www/iptvgenerator/lists/list.m3u",
+        "utf8",
+        function (err, data) {
+          if (err) {
+            // check and handle err
+            res.status(500).json(err);
+            res.end();
           }
-        );
-      });
+          // data is the file contents as a single unified string
+          // .split('\n') splits it at each new-line character and all splits are aggregated into an array (i.e. turns it into an array of lines)
+          // .slice(1) returns a view into that array starting at the second entry from the front (i.e. the first element, but slice is zero-indexed so the "first" is really the "second")
+          // .join() takes that array and re-concatenates it into a string
+          //  var linesExceptFirst = data.split("\n").slice(2, 3, 4).join("\n");
+          result = data.replace(re, "");
+          console.log();
+          fs.writeFile(
+            "../../../../var/www/iptvgenerator/lists/list.m3u",
+            result.trim(),
+            function (err, data) {
+              if (err) {
+                /** check and handle err */
+              }
+            }
+          );
+        }
+      );
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);
