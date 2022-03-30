@@ -1,6 +1,5 @@
 import Channel from "../../../models/Channel";
 import dbConnect from "../../../util/mongo";
-import config from "../../../../";
 
 const handler = async (req, res) => {
   const {
