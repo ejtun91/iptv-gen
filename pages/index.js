@@ -16,7 +16,7 @@ export default function Home({ channels, tags }) {
         <title>IPTV Generator</title>
         <meta
           name="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
+          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it. Croatia IPTV, Germany IPTV, USA IPTV, UK IPTV, France IPTV, Scandinavia IPTV, Turkey IPTV, Netherlands, m3u channels free"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta

@@ -11,7 +11,9 @@ const CountryList = ({ query, setQuery }) => {
         <SearchBar query={query} setQuery={setQuery} />
       </div>
       <div className={styles.itemFirst}>
-        <h3 className={styles.continentTitle}>EUROPE</h3>
+        <h1 style={{ fontSize: "20px" }} className={styles.continentTitle}>
+          EUROPE
+        </h1>
       </div>
       {countries.slice(0, 40).map((country) => (
         <Link key={country.id} href={`/country/${country.id}`} passHref>
@@ -26,12 +28,19 @@ const CountryList = ({ query, setQuery }) => {
                 className={styles.imgCountry}
               />
             </div>
-            <span className={styles.countryTitle}>{country.name}</span>
+            <h2
+              style={{ fontSize: "15px", margin: "inherit" }}
+              className={styles.countryTitle}
+            >
+              {country.name}
+            </h2>
           </div>
         </Link>
       ))}
       <div className={styles.itemFirst}>
-        <h3 className={styles.continentTitle}>NORTH AMERICA</h3>
+        <h1 style={{ fontSize: "20px" }} className={styles.continentTitle}>
+          NORTH AMERICA
+        </h1>
       </div>
       {countries.slice(40, 42).map((country) => (
         <Link key={country.id} href={`/country/${country.id}`} passHref>
@@ -46,12 +55,19 @@ const CountryList = ({ query, setQuery }) => {
                 className={styles.imgCountry}
               />
             </div>
-            <span className={styles.countryTitle}>{country.name}</span>
+            <h2
+              style={{ fontSize: "15px", margin: "inherit" }}
+              className={styles.countryTitle}
+            >
+              {country.name}
+            </h2>
           </div>
         </Link>
       ))}
       <div className={styles.itemFirst}>
-        <h3 className={styles.continentTitle}>LATIN AMERICA</h3>
+        <h1 style={{ fontSize: "20px" }} className={styles.continentTitle}>
+          LATIN AMERICA
+        </h1>
       </div>
       {countries.slice(42, 57).map((country) => (
         <Link key={country.id} href={`/country/${country.id}`} passHref>
@@ -66,12 +82,19 @@ const CountryList = ({ query, setQuery }) => {
                 className={styles.imgCountry}
               />
             </div>
-            <span className={styles.countryTitle}>{country.name}</span>
+            <h2
+              style={{ fontSize: "15px", margin: "inherit" }}
+              className={styles.countryTitle}
+            >
+              {country.name}
+            </h2>
           </div>
         </Link>
       ))}
       <div className={styles.itemFirst}>
-        <h3 className={styles.continentTitle}>AFRICA</h3>
+        <h1 style={{ fontSize: "20px" }} className={styles.continentTitle}>
+          AFRICA
+        </h1>
       </div>
       {countries.slice(57, 66).map((country) => (
         <Link key={country.id} href={`/country/${country.id}`} passHref>
@@ -86,12 +109,19 @@ const CountryList = ({ query, setQuery }) => {
                 className={styles.imgCountry}
               />
             </div>
-            <span className={styles.countryTitle}>{country.name}</span>
+            <h2
+              style={{ fontSize: "15px", margin: "inherit" }}
+              className={styles.countryTitle}
+            >
+              {country.name}
+            </h2>
           </div>
         </Link>
       ))}
       <div className={styles.itemFirst}>
-        <h3 className={styles.continentTitle}>ASIA</h3>
+        <h1 style={{ fontSize: "20px" }} className={styles.continentTitle}>
+          ASIA
+        </h1>
       </div>
       {countries.slice(66, 82).map((country) => (
         <Link key={country.id} href={`/country/${country.id}`} passHref>
@@ -106,7 +136,12 @@ const CountryList = ({ query, setQuery }) => {
                 className={styles.imgCountry}
               />
             </div>
-            <span className={styles.countryTitle}>{country.name}</span>
+            <h2
+              style={{ fontSize: "15px", margin: "inherit" }}
+              className={styles.countryTitle}
+            >
+              {country.name}
+            </h2>
           </div>
         </Link>
       ))}

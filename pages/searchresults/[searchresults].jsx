@@ -415,9 +415,16 @@ const SearchResults = ({ status, searchList, tags }) => {
                             width={15}
                             src={countries[channel.country - 1].img}
                           />
-                          <span className={styles.channelTitle}>
+                          <h6
+                            style={{
+                              display: "inline-block",
+                              marginTop: 0,
+                              marginBottom: 0,
+                            }}
+                            className={styles.channelTitle}
+                          >
                             {channel.title}
-                          </span>
+                          </h6>
                         </div>
                         <div className={styles.downloadListInfo}>
                           <span className={styles.spanInfo}>

@@ -16,35 +16,35 @@ const handler = async (req, res) => {
 
   // console.log(req.body);
 
-  if (method === "GET") {
-    fs.readFile(
-      "../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u",
-      "utf-8",
-      function (err, data) {
-        if (err) throw err;
+  // if (method === "GET") {
+  //   fs.readFile(
+  //     "../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u",
+  //     "utf-8",
+  //     function (err, data) {
+  //       if (err) throw err;
 
-        var result = data.replace(
-          /(\sHD)|(\sFHD)|(\sUHD)|(\s(HD))|(\s(UHD))|(\s(FHD))/g,
-          ""
-        );
+  //       var result = data.replace(
+  //         /(\sHD)|(\sFHD)|(\sUHD)|(\s(HD))|(\s(UHD))|(\s(FHD))/g,
+  //         ""
+  //       );
 
-        try {
-          fs.writeFile(
-            `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
-            result.trim(),
-            function (err, data) {
-              if (err) {
-                /** check and handle err */
-              }
-            }
-          );
-          res.status(200).json("ok");
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    );
-  }
+  //       try {
+  //         fs.writeFile(
+  //           `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
+  //           result.trim(),
+  //           function (err, data) {
+  //             if (err) {
+  //               /** check and handle err */
+  //             }
+  //           }
+  //         );
+  //         res.status(200).json("ok");
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   );
+  // }
 
   if (method === "PUT") {
     if (!token || token !== process.env.TOKEN) {
@@ -103,8 +103,8 @@ const handler = async (req, res) => {
                     "utf8",
                     async function (err, items) {
                       // Display the file content
-                      let regexP = `(?<=${temp}\r|${temp}\n|${temp}\r\n)[^\r\n]+`;
-                      let pat2 = new RegExp(regexP, "g");
+                      let regexP = `${temp}(.*?)[\r\n]+([^\r\n]+)`;
+                      let pat2 = new RegExp(regexP, "gi");
                       //     console.log(files.match(pat2));
                       console.log(files.match(pat2));
 
@@ -113,9 +113,17 @@ const handler = async (req, res) => {
                       await Channel.updateOne(
                         { title: temp },
                         {
-                          $set: { url: files.match(pat2)[0] },
+                          $set: {
+                            url: files
+                              .match(pat2)[0]
+                              .slice(
+                                files.match(pat2)[0].indexOf("\n") + 1,
+                                files.match(pat2)[0].length
+                              ),
+                          },
                         }
                       );
+
                       fs.writeFile(
                         `../../../../var/www/iptvgenerator/lists/${temp.replace(
                           / /g,

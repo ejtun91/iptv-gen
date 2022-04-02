@@ -334,9 +334,9 @@ const Country = ({ channelList, status, tags }) => {
                     width={15}
                     src={countries[path - 1].img}
                   />
-                  <span className={styles.countryTitle}>
+                  <h1 className={styles.countryTitle}>
                     {countries[path - 1].name.toUpperCase()}
-                  </span>
+                  </h1>
                 </td>
               </tr>
               <tr className={styles.tr}>
@@ -452,9 +452,16 @@ const Country = ({ channelList, status, tags }) => {
                             width={15}
                             src={countries[path - 1].img}
                           />
-                          <span className={styles.channelTitle}>
+                          <h6
+                            style={{
+                              display: "inline-block",
+                              marginTop: 0,
+                              marginBottom: 0,
+                            }}
+                            className={styles.channelTitle}
+                          >
                             {channel.title}
-                          </span>
+                          </h6>
                         </div>
                         <div className={styles.downloadListInfo}>
                           <span className={styles.spanInfo}>

@@ -16,10 +16,7 @@ const Admin = ({ channels }) => {
   const [error, setOnError] = useState(false);
   const [playlist, setPlaylist] = useState("");
   const [tag, setTag] = useState("");
-  const [disabled, setDisabled] = useState({
-    firstBtn: false,
-    secondBtn: false,
-  });
+  const [disabled, setDisabled] = useState(false);
 
   const country = parseInt(countryId);
   console.log(channels);
@@ -29,10 +26,7 @@ const Admin = ({ channels }) => {
       await axiosInstance.put("/upload/upload", {
         playlist: playlist,
       });
-      setDisabled((prevState) => ({
-        ...prevState,
-        firstBtn: true,
-      }));
+      setDisabled(true);
       console.log(disabled);
     } catch (error) {
       console.log(error);
@@ -51,18 +45,18 @@ const Admin = ({ channels }) => {
     }
   };
 
-  const handleRemoveExtraText = async () => {
-    try {
-      await axiosInstance.get("/upload/upload");
-      setDisabled((prevState) => ({
-        ...prevState,
-        secondBtn: true,
-      }));
-      console.log(disabled);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleRemoveExtraText = async () => {
+  //   try {
+  //     await axiosInstance.get("/upload/upload");
+  //     setDisabled((prevState) => ({
+  //       ...prevState,
+  //       secondBtn: true,
+  //     }));
+  //     console.log(disabled);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleCreate = async () => {
     try {
@@ -131,25 +125,13 @@ const Admin = ({ channels }) => {
           </button>
           <button
             style={
-              !disabled.firstBtn
-                ? { backgroundColor: "gray", cursor: "not-allowed" }
-                : { backgroundColor: "#004e89" }
-            }
-            disabled={!disabled.firstBtn}
-            onClick={handleRemoveExtraText}
-            className={styles.replaceBtn}
-          >
-            Remove HD|UHD
-          </button>
-          <button
-            style={
-              !disabled.secondBtn
+              !disabled
                 ? { backgroundColor: "gray", cursor: "not-allowed" }
                 : { backgroundColor: "#004e89" }
             }
             onClick={handleReplaceLinks}
             className={styles.replaceBtn}
-            disabled={!disabled.secondBtn}
+            disabled={!disabled}
           >
             Replace Links
           </button>

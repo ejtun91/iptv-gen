@@ -28,7 +28,12 @@ const Sidebar = ({ channels, tags }) => {
                       width={20}
                       height={15}
                     />
-                    <span className={styles.countryTitle}>{channel.title}</span>
+                    <h3
+                      style={{ fontSize: "inherit", margin: "inherit" }}
+                      className={styles.countryTitle}
+                    >
+                      {channel.title}
+                    </h3>
                   </td>
                 </tr>
               ))}
