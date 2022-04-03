@@ -10,7 +10,7 @@ const handler = async (req, res) => {
 
   const fs = require("fs");
   const token = cookies.token;
-  const regexPattern = /(http(.*)\d{3,})/gm;
+  const regexPattern = /(http(.*))/;
 
   dbConnect();
 
