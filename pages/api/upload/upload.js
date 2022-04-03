@@ -18,7 +18,7 @@ const handler = async (req, res) => {
 
   // if (method === "GET") {
   //   fs.readFile(
-  //     "public/lists/uploaded/playlist.m3u",
+  //     "../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u",
   //     "utf-8",
   //     function (err, data) {
   //       if (err) throw err;
@@ -30,7 +30,7 @@ const handler = async (req, res) => {
 
   //       try {
   //         fs.writeFile(
-  //           `public/lists/uploaded/playlist.m3u`,
+  //           `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
   //           result.trim(),
   //           function (err, data) {
   //             if (err) {
@@ -53,7 +53,7 @@ const handler = async (req, res) => {
 
     try {
       fs.writeFile(
-        `public/lists/uploaded/playlist.m3u`,
+        `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
         req.body.playlist,
         (err) => {
           if (err) console.log(err);
@@ -76,7 +76,7 @@ const handler = async (req, res) => {
     try {
       // UPDATE FILE
       const dataFiles = fs.readFile(
-        `public/lists/uploaded/playlist.m3u`,
+        `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
         "utf8",
         async function (err, files) {
           // Display the file content
@@ -98,7 +98,9 @@ const handler = async (req, res) => {
               if (
                 pat.test(files) == true &&
                 fs.existsSync(
-                  `public/lists/${data[key].title.replace(/ /i, "_")}.m3u`
+                  `../../../../var/www/iptvgenerator/lists/${data[
+                    key
+                  ].title.replace(/ /i, "_")}.m3u`
                 )
               ) {
                 let temp = data[key].title;
@@ -106,7 +108,10 @@ const handler = async (req, res) => {
                 console.log(temp);
 
                 fs.readFile(
-                  `public/lists/${temp.replace(/ /gi, "_")}.m3u`,
+                  `../../../../var/www/iptvgenerator/lists/${temp.replace(
+                    / /gi,
+                    "_"
+                  )}.m3u`,
                   "utf8",
                   async function (err, items) {
                     // Display the file content
@@ -131,7 +136,10 @@ const handler = async (req, res) => {
                     );
 
                     fs.writeFile(
-                      `public/lists/${temp.replace(/ /gi, "_")}.m3u`,
+                      `../../../../var/www/iptvgenerator/lists/${temp.replace(
+                        / /gi,
+                        "_"
+                      )}.m3u`,
                       result,
                       function (err) {
                         if (err) return console.log(err);
