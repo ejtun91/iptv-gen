@@ -515,7 +515,7 @@ const Country = ({ channelList, status, tags }) => {
                             onClick={() =>
                               copyToClipboard(
                                 `https://lists.iptvgenerate.com/${channel.title.replace(
-                                  / /g,
+                                  / /gi,
                                   "_"
                                 )}.m3u`
                               )
@@ -528,7 +528,7 @@ const Country = ({ channelList, status, tags }) => {
                             onClick={() =>
                               downloadFile(
                                 `https://lists.iptvgenerate.com/${channel.title.replace(
-                                  / /g,
+                                  / /gi,
                                   "_"
                                 )}.m3u`,
                                 `${channel.title.replace(/ /g, "_")}.m3u`

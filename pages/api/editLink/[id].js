@@ -29,7 +29,7 @@ const handler = async (req, res) => {
 
   fs.writeFileSync(
     `../../../../var/www/iptvgenerator/lists/${req.body.title.replace(
-      / /g,
+      / /gi,
       "_"
     )}.m3u`,
     result,

@@ -440,7 +440,7 @@ const Sports = ({ channelData, tags }) => {
                             onClick={() =>
                               copyToClipboard(
                                 `https://lists.iptvgenerate.com/${channel.title.replace(
-                                  / /g,
+                                  / /gi,
                                   "_"
                                 )}.m3u`
                               )
@@ -453,10 +453,10 @@ const Sports = ({ channelData, tags }) => {
                             onClick={() =>
                               downloadFile(
                                 `https://lists.iptvgenerate.com/${channel.title.replace(
-                                  / /g,
+                                  / /gi,
                                   "_"
                                 )}.m3u`,
-                                `${channel.title.replace(/ /g, "_")}.m3u`
+                                `${channel.title.replace(/ /gi, "_")}.m3u`
                               )
                             }
                             className={styles.spanBtn}

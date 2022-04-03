@@ -100,7 +100,7 @@ const handler = async (req, res) => {
                 fs.existsSync(
                   `../../../../var/www/iptvgenerator/lists/${files
                     .match(pat)[0]
-                    .replace(/ /g, "_")}.m3u`
+                    .replace(/ /i, "_")}.m3u`
                 )
               ) {
                 let temp = data[key].title;
@@ -109,7 +109,7 @@ const handler = async (req, res) => {
 
                 fs.readFile(
                   `../../../../var/www/iptvgenerator/lists/${temp.replace(
-                    / /g,
+                    / /gi,
                     "_"
                   )}.m3u`,
                   "utf8",
@@ -137,7 +137,7 @@ const handler = async (req, res) => {
 
                     fs.writeFile(
                       `../../../../var/www/iptvgenerator/lists/${temp.replace(
-                        / /g,
+                        / /gi,
                         "_"
                       )}.m3u`,
                       result,

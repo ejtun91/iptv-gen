@@ -43,7 +43,7 @@ const handler = async (req, res) => {
 
       findRemoveSync("lists", {
         limit: 1,
-        files: `${req.body.title.replace(/ /g, "_")}.m3u`,
+        files: `${req.body.title.replace(/ /gi, "_")}.m3u`,
       });
       res.status(200).json(channel);
     } catch (error) {

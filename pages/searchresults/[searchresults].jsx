@@ -478,7 +478,7 @@ const SearchResults = ({ status, searchList, tags }) => {
                             onClick={() =>
                               copyToClipboard(
                                 `https://lists.iptvgenerate.com/${channel.title.replace(
-                                  / /g,
+                                  / /gi,
                                   "_"
                                 )}.m3u`
                               )
@@ -491,7 +491,7 @@ const SearchResults = ({ status, searchList, tags }) => {
                             onClick={() =>
                               downloadFile(
                                 `https://lists.iptvgenerate.com/${channel.title.replace(
-                                  / /g,
+                                  / /gi,
                                   "_"
                                 )}.m3u`,
                                 `${channel.title.replace(/ /g, "_")}.m3u`

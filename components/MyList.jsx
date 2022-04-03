@@ -184,7 +184,7 @@ const MyList = () => {
                     onClick={() =>
                       copyToClipboard(
                         `https://iptvgenerate.com/lists/${channel.title.replace(
-                          / /g,
+                          / /gi,
                           "_"
                         )}.m3u`
                       )

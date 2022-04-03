@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
   }
   if (method === "POST") {
-    let titleTrimmed = req.body.title.replace(/ /g, "_");
+    let titleTrimmed = req.body.title.replace(/ /gi, "_");
     console.log(req.body);
     try {
       const channel = await Channel.create(req.body);
