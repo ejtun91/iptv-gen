@@ -45,6 +45,7 @@ const CountryAdmin = ({ channelList, status }) => {
       await axiosInstance.put(`/edit/${channelId}`, {
         status: onlineStatus,
         title: title ? title : channelList[rowId].title,
+        oldTitle: channelList[rowId].title,
       });
       refreshData();
       setInEditMode({

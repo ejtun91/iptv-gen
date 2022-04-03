@@ -18,13 +18,17 @@ const handler = async (req, res) => {
 
   // UPDATE FILE
   const data = fs.readFileSync(
-    `../../../../var/www/iptvgenerator/lists/${req.body.title}.m3u`,
+    `../../../../var/www/iptvgenerator/lists/${req.body.title.replace(
+      / /gi,
+      "_"
+    )}.m3u`,
     "utf8",
     function (err, data) {
       // Display the file content
       console.log(data);
     }
   );
+
   let result = data.replace(regexPattern, req.body.url);
 
   fs.writeFileSync(
