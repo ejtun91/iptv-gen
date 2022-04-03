@@ -53,7 +53,7 @@ const handler = async (req, res) => {
 
     try {
       fs.writeFile(
-        `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
+        `public/lists/uploaded/playlist.m3u`,
         req.body.playlist,
         (err) => {
           if (err) console.log(err);
@@ -76,7 +76,7 @@ const handler = async (req, res) => {
     try {
       // UPDATE FILE
       const dataFiles = fs.readFile(
-        `../../../../var/www/iptvgenerator/lists/uploaded/playlist.m3u`,
+        `public/lists/uploaded/playlist.m3u`,
         "utf8",
         async function (err, files) {
           // Display the file content
@@ -98,20 +98,15 @@ const handler = async (req, res) => {
               if (
                 pat.test(files) == true &&
                 fs.existsSync(
-                  `../../../../var/www/iptvgenerator/lists/${files
-                    .match(pat)[0]
-                    .replace(/ /i, "_")}.m3u`
+                  `public/lists/${data[key].title.replace(/ /i, "_")}.m3u`
                 )
               ) {
                 let temp = data[key].title;
 
-                console.log(files.match(pat)[0]);
+                console.log(temp);
 
                 fs.readFile(
-                  `../../../../var/www/iptvgenerator/lists/${temp.replace(
-                    / /gi,
-                    "_"
-                  )}.m3u`,
+                  `public/lists/${temp.replace(/ /gi, "_")}.m3u`,
                   "utf8",
                   async function (err, items) {
                     // Display the file content
@@ -136,10 +131,7 @@ const handler = async (req, res) => {
                     );
 
                     fs.writeFile(
-                      `../../../../var/www/iptvgenerator/lists/${temp.replace(
-                        / /gi,
-                        "_"
-                      )}.m3u`,
+                      `public/lists/${temp.replace(/ /gi, "_")}.m3u`,
                       result,
                       function (err) {
                         if (err) return console.log(err);
