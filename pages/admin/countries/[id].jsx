@@ -23,7 +23,7 @@ const CountryAdmin = ({ channelList, status }) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [disabled, setDisabled] = useState(false);
-
+  const [playlist, setPlaylist] = useState("");
   console.log(channelList);
 
   const handleUpload = async () => {
