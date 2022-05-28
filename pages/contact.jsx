@@ -43,14 +43,10 @@ const Contact = () => {
         <title>IPTV Generator | Contact</title>
         <meta
           name="description"
-          content="feel free to contact us on the contact page. If you have any queries regarding to our services please feel free to do so."
+          content="this is our contact page, you can contact us directly if you have any concerns or something related to this website, we are happy to help"
         />
         {/*<!-- Google / Search Engine Tags -->*/}
         <meta itemProp="name" content={`IPTV Generator | Contact`} />
-        <meta
-          itemProp="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
-        />
         <script
           src="https://www.google.com/recaptcha/api.js"
           async

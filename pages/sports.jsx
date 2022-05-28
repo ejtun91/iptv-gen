@@ -267,20 +267,17 @@ const Sports = ({ channelData, tags }) => {
       className={classes.root}
     >
       <Head>
-        <title>IPTV Generator | Sports</title>
+        <title>
+          Sports: free iptv channels, m3u lists checked and updated daily | IPTV
+          Generator
+        </title>
         <meta
           name="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
+          content="sports iptv channels daily, updated daily, tested vlc iptv streams, m3u8 link, m3u files, m3u8 playlist, download free, best lists, iptv streaming channels."
         />
         <meta
           name="keywords"
           content={`iptv, free m3u, free iptv playlist, best iptv channels, free sports m3u, free sport m3u channels, free download sports playlist`}
-        />
-        {/*<!-- Google / Search Engine Tags -->*/}
-        <meta itemProp="name" content={`IPTV Generator | Sports`} />
-        <meta
-          itemProp="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download m3u and m3u8 files."
         />
         <link rel="icon" href="/logo.ico" />
       </Head>

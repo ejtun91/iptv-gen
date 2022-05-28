@@ -226,3 +226,59 @@
   flex-direction: column;
   gap: 0.2em;
 }
+
+/******* ADD NEW CHANNELS *********/
+
+.item:nth-child(3) {
+  width: 500px;
+  padding: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  position: relative;
+  border: 1px solid gray;
+  height: max-content;
+  margin-top: 5em;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
+}
+
+.addButton,
+.replaceBtn,
+.uploadBtn {
+  width: 25%;
+  border: none;
+  background-color: var(--mainColor);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0;
+  align-self: flex-end;
+  border-radius: 5px;
+}
+.textarea {
+  padding: 20px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+}
+
+.textarea:focus {
+  outline: none;
+}

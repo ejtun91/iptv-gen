@@ -13,24 +13,19 @@ export default function Home({ channels, tags }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>IPTV Generator</title>
+        <title>
+          IPTV Generator | Free iptv, m3u, m3u8 lists and servers, updated
+          daily, tested iptv streams
+        </title>
         <meta
           name="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it. Croatia IPTV, Germany IPTV, USA IPTV, UK IPTV, France IPTV, Scandinavia IPTV, Turkey IPTV, Netherlands, m3u channels free"
+          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it. Croatia IPTV, Germany IPTV, USA IPTV, UK IPTV, France IPTV, Scandinavia IPTV, Turkey IPTV, Netherlands, m3u channels free, m3u8 links download, updated daily, vlc streams"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="keywords"
           content="iptv, free m3u, free iptv playlist, best iptv channels, download free m3u channels, m3u iptv playlist 2022"
         />
-        {/*<!-- Google / Search Engine Tags -->*/}
-        <meta itemProp="name" content="IPTV Generator" />
-        <meta
-          itemProp="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
-        />
-        <meta itemProp="image" content="" />
-        <link rel="icon" href="/logo.ico" />
       </Head>
       <Script
         id="google-analytics"

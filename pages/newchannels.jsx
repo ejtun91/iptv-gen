@@ -254,21 +254,19 @@ const NewChannels = ({ channelData, tags }) => {
       className={classes.root}
     >
       <Head>
-        <title>IPTV Generator | New Channels</title>
+        <title>
+          New Channels: free iptv channels, m3u lists checked and updated daily
+          | IPTV Generator
+        </title>
         <meta
           name="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
+          content="new channels page for downloading new channels, m3u, m3u8, iptv daily new, tested new channels, vlc streams new"
         />
         <meta
           name="keywords"
-          content={`iptv, free m3u, free iptv playlist, best iptv channels, new channels download, iptv channels`}
+          content={`new iptv channels, free m3u, free iptv playlist, best iptv channels, new channels download, iptv channels`}
         />
         {/*<!-- Google / Search Engine Tags -->*/}
-        <meta itemProp="name" content={`IPTV Generator | Contact`} />
-        <meta
-          itemProp="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
-        />
         <link rel="icon" href="/logo.ico" />
       </Head>
       <Featured />

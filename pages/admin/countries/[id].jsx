@@ -22,6 +22,32 @@ const CountryAdmin = ({ channelList, status }) => {
   const [onlineStatus, setOnlineStatus] = useState("1");
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
+  console.log(channelList);
+
+  const handleUpload = async () => {
+    try {
+      await axiosInstance.put("/upload/upload", {
+        playlist: playlist,
+      });
+      setDisabled(true);
+      console.log(disabled);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleReplaceLinks = async () => {
+    try {
+      await axiosInstance.post("/upload/upload", {
+        playlist: playlist,
+        channels: channelList,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Call this function when you want to refresh the data
   const refreshData = () => router.replace(router.asPath);
@@ -103,6 +129,39 @@ const CountryAdmin = ({ channelList, status }) => {
           <KeyboardBackspace style={{ fontSize: "35px" }} />
         </span>
       </Link>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "2em",
+          width: "800px",
+        }}
+      >
+        <h3>Upload playlist for {countries[path - 1].name.toUpperCase()}</h3>
+        <textarea
+          name="textarea"
+          id="textarea"
+          cols="30"
+          onChange={(e) => setPlaylist(e.target.value)}
+          className={styles.textarea}
+          rows="10"
+        ></textarea>
+        <button onClick={handleUpload} className={styles.uploadBtn}>
+          Upload
+        </button>
+        <button
+          style={
+            !disabled
+              ? { backgroundColor: "gray", cursor: "not-allowed" }
+              : { backgroundColor: "#004e89" }
+          }
+          onClick={handleReplaceLinks}
+          className={styles.replaceBtn}
+          disabled={!disabled}
+        >
+          Replace Links
+        </button>
+      </div>
       <div className={styles.mainContainer}>
         <h1 style={{ textAlign: "center", padding: 0 }}>EDIT LISTS</h1>
         <table className={styles.table}>

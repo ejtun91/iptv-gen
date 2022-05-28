@@ -288,10 +288,25 @@ const Country = ({ channelList, status, tags }) => {
       className={classes.root}
     >
       <Head>
-        <title>IPTV Generator | {countries[path - 1].name.toUpperCase()}</title>
+        <title>
+          {countries[path - 1].name.toUpperCase()}: free iptv channels, m3u
+          lists checked and updated daily
+        </title>
         <meta
           name="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download it."
+          content={`${countries[path - 1].name} free iptv, ${
+            countries[path - 1].name
+          } free m3u8, ${countries[path - 1].name} free m3u links, ${
+            countries[path - 1].name
+          } iptv list, ${countries[path - 1].name} iptv vlc, ${
+            countries[path - 1].name
+          } m3u file, ${countries[path - 1].name} m3u playlist, ${
+            countries[path - 1].name
+          } m3u extinf, ${countries[path - 1].name} iptv urls, ${
+            countries[path - 1].name
+          } iptv address, ${countries[path - 1].name} m3u8 playlist, ${
+            countries[path - 1].name
+          } daily m3u8, ${countries[path - 1].name} download free iptv daily`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -305,14 +320,30 @@ const Country = ({ channelList, status, tags }) => {
             countries[path - 1].name
           } free m3u channels download,`}
         />
+        <meta
+          property="og:title"
+          content={countries[path - 1].name.toUpperCase()}
+        />
+        <meta
+          property="og:description"
+          content={`${countries[path - 1].name} free iptv, ${
+            countries[path - 1].name
+          } free m3u8, ${countries[path - 1].name} free m3u links, ${
+            countries[path - 1].name
+          } iptv list, ${countries[path - 1].name} iptv vlc, ${
+            countries[path - 1].name
+          } m3u file, ${countries[path - 1].name} m3u playlist, ${
+            countries[path - 1].name
+          } m3u extinf, ${countries[path - 1].name} iptv urls, ${
+            countries[path - 1].name
+          } iptv address, ${countries[path - 1].name} m3u8 playlist, ${
+            countries[path - 1].name
+          } daily m3u8, ${countries[path - 1].name} download free iptv daily`}
+        />
         {/*<!-- Google / Search Engine Tags -->*/}
         <meta
           itemProp="name"
-          content={`IPTV Generator | ${countries[path - 1].name.toUpperCase()}`}
-        />
-        <meta
-          itemProp="description"
-          content="iptv generator is website with thousands of channels for streaming, where you can customize your own iptv list and download m3u and m3u8 files."
+          content={`${countries[path - 1].name.toUpperCase()}`}
         />
         <meta itemProp="image" content={`${countries[path - 1].img}`} />
         <link rel="icon" href="/logo.ico" />
