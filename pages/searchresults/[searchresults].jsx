@@ -26,6 +26,7 @@ import { axiosInstance } from "../../config";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import Alert from "@material-ui/lab/Alert";
+import Head from "next/head";
 
 function AlertMui(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -278,6 +279,12 @@ const SearchResults = ({ status, searchList, tags }) => {
       }}
       className={classes.root}
     >
+      <Head>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </Head>
       <Featured />
       <div className={styles.container}>
         <div className={styles.mainContainer}>

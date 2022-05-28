@@ -272,6 +272,10 @@ const Sports = ({ channelData, tags }) => {
           Generator
         </title>
         <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+        <meta
           name="description"
           content="sports iptv channels daily, updated daily, tested vlc iptv streams, m3u8 link, m3u files, m3u8 playlist, download free, best lists, iptv streaming channels."
         />

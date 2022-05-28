@@ -309,7 +309,10 @@ const Country = ({ channelList, status, tags }) => {
           } daily m3u8, ${countries[path - 1].name} download free iptv daily`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <meta
           name="keywords"
           content={`iptv, free m3u, free iptv playlist, best iptv channels, free ${
