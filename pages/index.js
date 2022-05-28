@@ -27,7 +27,7 @@ export default function Home({ channels, tags }) {
           content="iptv, free m3u, free iptv playlist, best iptv channels, download free m3u channels, m3u iptv playlist 2022"
         />
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
       </Head>

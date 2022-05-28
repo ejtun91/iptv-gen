@@ -259,7 +259,7 @@ const NewChannels = ({ channelData, tags }) => {
           | IPTV Generator
         </title>
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
         <meta
