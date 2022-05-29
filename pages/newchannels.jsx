@@ -259,10 +259,6 @@ const NewChannels = ({ channelData, tags }) => {
           | IPTV Generator
         </title>
         <meta
-          httpEquiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
-        <meta
           name="description"
           content="new channels page for downloading new channels, m3u, m3u8, iptv daily new, tested new channels, vlc streams new"
         />

@@ -279,12 +279,6 @@ const SearchResults = ({ status, searchList, tags }) => {
       }}
       className={classes.root}
     >
-      <Head>
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
-      </Head>
       <Featured />
       <div className={styles.container}>
         <div className={styles.mainContainer}>

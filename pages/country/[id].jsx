@@ -310,10 +310,6 @@ const Country = ({ channelList, status, tags }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
-          httpEquiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
-        <meta
           name="keywords"
           content={`iptv, free m3u, free iptv playlist, best iptv channels, free ${
             countries[path - 1].name

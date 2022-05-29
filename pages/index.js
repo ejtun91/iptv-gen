@@ -26,10 +26,6 @@ export default function Home({ channels, tags }) {
           name="keywords"
           content="iptv, free m3u, free iptv playlist, best iptv channels, download free m3u channels, m3u iptv playlist 2022"
         />
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
       </Head>
       <Script
         id="google-analytics"
