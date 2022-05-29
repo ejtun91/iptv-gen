@@ -191,14 +191,14 @@ export default async function handler(req, res) {
   }
   if (method === "PUT") {
     //  let titleTrimmed = req.body.title.replace(/ /g, "_");
-    let data = fs.createReadStream(
-      "public/lists/template/playlist_template.m3u"
-    );
+    // let data = fs.createReadStream(
+    //   "public/lists/template/playlist_template.m3u"
+    // );
     let remotePath = `/root/iptvgenerator/public/lists/mylist/${req.body.uid}.m3u`;
     const uuid = req.body.uid;
     try {
       const channel = await Channel.find();
-      const file = "public/lists/mylist/mylist.m3u";
+      //     const file = "public/lists/mylist/mylist.m3u";
       //  UPLOAD FILE
       const htmlString = `#EXTM3U
 `;
