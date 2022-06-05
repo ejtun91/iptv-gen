@@ -1,14 +1,12 @@
-import styles from "../styles/Featured.module.css";
-import { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
-const Featured = () => {
+const AdBanner = () => {
   const banner = useRef();
-
   const atOptions = {
-    key: "53b4d73fe814a23d53844079c17969dd",
+    key: "c987fe3643a7a0b52c36f05edb975e77",
     format: "iframe",
-    height: 90,
-    width: 728,
+    height: 60,
+    width: 468,
     params: {},
   };
 
@@ -27,7 +25,7 @@ const Featured = () => {
     }
   }, []);
 
-  return <div ref={banner} className={styles.container}></div>;
+  return <div style={{ textAlign: "center" }} ref={banner}></div>;
 };
 
-export default Featured;
+export default AdBanner;

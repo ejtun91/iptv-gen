@@ -21,6 +21,7 @@ import {
   reset,
 } from "../redux/listSlice";
 import MuiAlert from "@material-ui/lab/Alert";
+import AdBanner from "../components/AdBanner";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -462,6 +463,7 @@ const NewChannels = ({ channelData, tags }) => {
           <div className={styles.item}>
             {mylist.items.length !== 0 && <MyList />}
           </div>
+          <AdBanner />
           <div className={styles.item}>
             <Notice />
           </div>

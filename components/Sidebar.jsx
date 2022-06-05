@@ -1,6 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { countries } from "../data";
 import styles from "../styles/Sidebar.module.css";
@@ -10,6 +11,29 @@ import Tags from "./Tags";
 
 const Sidebar = ({ channels, tags }) => {
   const quantity = useSelector((state) => state.list?.quantity);
+  const banner = useRef();
+  const atOptions = {
+    key: "a9b654a472dfc116371face553246fa3",
+    format: "iframe",
+    height: 600,
+    width: 160,
+    params: {},
+  };
+
+  useEffect(() => {
+    if (!banner.current.firstChild) {
+      const conf = document.createElement("script");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `//www.topdisplayformat.com/${atOptions.key}/invoke.js`;
+      conf.innerHTML = `atOptions = ${JSON.stringify(atOptions)}`;
+
+      if (banner.current) {
+        banner.current.append(conf);
+        banner.current.append(script);
+      }
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -50,6 +74,7 @@ const Sidebar = ({ channels, tags }) => {
       <div className={styles.item}>
         <Tags tags={tags} />
       </div>
+      <div ref={banner}></div>
     </div>
   );
 };
