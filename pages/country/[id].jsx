@@ -27,8 +27,6 @@ import Head from "next/head";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import Alert from "@material-ui/lab/Alert";
-import AdBanner from "../../components/AdBanner";
-import AdBanner2 from "../../components/AdBanner2";
 
 function AlertMui(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -595,7 +593,6 @@ const Country = ({ channelList, status, tags }) => {
               </tr>
             </tbody>
           </table>
-          <AdBanner2 />
 
           <Pagination
             style={{
@@ -615,7 +612,6 @@ const Country = ({ channelList, status, tags }) => {
           <div className={styles.item}>
             {mylist.items.length !== 0 && <MyList />}
           </div>
-          <AdBanner />
           <div className={styles.item}>
             <Notice />
           </div>

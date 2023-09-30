@@ -23,7 +23,6 @@ import styles from "../styles/Country.module.css";
 import Head from "next/head";
 import { makeStyles, Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import AdBanner from "../components/AdBanner";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -502,7 +501,6 @@ const Sports = ({ channelData, tags }) => {
           <div className={styles.item}>
             {mylist.items.length !== 0 && <MyList />}
           </div>
-          <AdBanner />
           <div className={styles.item}>
             <Notice />
           </div>
